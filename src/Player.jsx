@@ -4,6 +4,8 @@ import { floorHeight } from './constants';
 
 export default function Player() {
     const playerRef = useRef();
+    const [ subscribeKeys, getKeys ] = useKeyboardControls()
+
     function jump() {
         playerRef.current.applyImpulse({ x: 0, y: 50, z: 0 });
     }
