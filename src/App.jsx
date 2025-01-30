@@ -13,9 +13,9 @@ export default function App() {
         <KeyboardControls
             map={[
                 { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
-                { name: 'backward', keys: ['ArrowDown', 'KeyS'] },
-                { name: 'leftward', keys: ['ArrowLeft', 'KeyA'] },
-                { name: 'rightward', keys: ['ArrowRight', 'KeyD'] },
+                { name: 'back', keys: ['ArrowDown', 'KeyS'] },
+                { name: 'left', keys: ['ArrowLeft', 'KeyA'] },
+                { name: 'right', keys: ['ArrowRight', 'KeyD'] },
                 { name: 'jump', keys: ['Space'] },
             ]}>
             <Canvas shadows camera={{ fov: 20, position: [0, R * Math.sin(theta), R * Math.cos(theta)] }}>
@@ -31,7 +31,7 @@ export default function App() {
 function Experience() {
     return (
         <Suspense>
-            <Physics gravity={[0, -9.81, 0]} debug>
+            <Physics gravity={[0, -9.81, 0]}>
                 <Ground />
                 <Player />
                 <Lights />
