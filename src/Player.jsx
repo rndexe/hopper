@@ -24,6 +24,7 @@ export default function Player() {
                 if (right) nextV.x += vStrength;
 
                 playerRef.current.setLinvel(nextV);
+                // console.log(pressed, currV, nextV, playerRef.current.is)
             },
         );
 
@@ -51,7 +52,7 @@ export default function Player() {
     });
 
     return (
-        <RigidBody ref={playerRef} position-y={1 + floorHeight / 2} lockRotations restitution={1}>
+        <RigidBody ref={playerRef} position-y={1 + floorHeight / 2} lockRotations restitution={1} canSleep={false}>
             <mesh castShadow>
                 <sphereGeometry arg />
                 <meshStandardMaterial color={'green'} />
