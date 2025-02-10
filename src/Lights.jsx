@@ -6,13 +6,14 @@ export default function Lights() {
             <directionalLight
                 position={[0, 2, 0]}
                 castShadow
-                shadow-mapSize={[1024, 1024]}
+                shadow-mapSize={[2048, 2048]}
                 shadow-camera-near={0.1}
-                shadow-camera-far={20}
-                shadow-camera-left={-100}
-                shadow-camera-right={100}
-                shadow-camera-top={100}
-                shadow-camera-bottom={-100}
+                shadow-camera-far={11}
+                shadow-camera-left={-50}
+                shadow-camera-right={50}
+                shadow-camera-top={50}
+                shadow-camera-bottom={-50}
+                shadow-bias={-0.002}
             />
             <Environment preset="forest" />
             {/* <SoftShadows /> */}

@@ -31,7 +31,7 @@ export default function App() {
 function Experience() {
     return (
         <Suspense>
-            <Physics gravity={[0, -9.81, 0]}>
+            <Physics gravity={[0, -9.81, 0]} timeStep={'vary'} debug>
                 <Ground />
                 <Player />
                 <Lights />

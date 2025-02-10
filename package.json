@@ -1,19 +1,8 @@
 {
-    "name": "r3f-vite-starter",
+    "name": "hopper",
     "private": true,
-    "version": "1.0.0",
+    "version": "0.0.1",
     "type": "module",
-    "description": "A react-three-fiber starter with vite",
-    "keywords": [
-        "r3f",
-        "react",
-        "three",
-        "vite",
-        "starter",
-        "react three fiber"
-    ],
-    "author": "https://github.com/rndexe",
-    "repository": "github:rndexe/r3f-vite",
     "license": "MIT",
     "scripts": {
         "dev": "vite",
