@@ -7,7 +7,7 @@ import { mutation } from './utils';
 // import { Grid } from '@react-three/drei';
 
 export default function Ground() {
-    const shadowTexture = useTexture('/shadow.jpg');
+    const shadowTexture = useTexture('./shadow.jpg');
     const shadowRef = useRef();
     useFrame((state, delta) => {
         shadowRef.current.position.x = mutation.position.x;
