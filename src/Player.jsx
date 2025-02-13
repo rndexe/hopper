@@ -1,6 +1,6 @@
 import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Outlines, useKeyboardControls } from '@react-three/drei';
+import { Outlines, useKeyboardControls, useTexture } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import { floorHeight } from './constants';
 import { createGradientTexture, mutation } from './utils';
@@ -12,7 +12,6 @@ export default function Player() {
     const [sub, get] = useKeyboardControls();
 
     const gradientMap = useMemo(() => createGradientTexture(), []);
-    const groundLevel = useMemo(() => 1 + floorHeight / 2, []);
 
     function jump(payload) {
         const isGroundCollision = payload ? payload.other.rigidBody.userData.name == 'ground' : true;
@@ -42,6 +41,9 @@ export default function Player() {
             const scaleY = Math.abs(vel.y) / 20 + 1; // How much to stretch based on velocity
             meshRef.current.scale.lerp({ x: 1 / Math.sqrt(scaleY), y: scaleY, z: 1 / Math.sqrt(scaleY) }, 0.1); // Squish in other directions based on y- stretch
         }
+        mutation.position.x = playerRef.current.translation().x;
+        mutation.position.y = playerRef.current.translation().y;
+        mutation.position.z = playerRef.current.translation().z;
     });
 
     return (
@@ -50,11 +52,11 @@ export default function Player() {
             onCollisionEnter={jump}
             lockRotations
             canSleep={false}
-            position-y={groundLevel + 2}
+            position-y={mutation.position[1]}
             colliders={false}>
             <CuboidCollider args={[1, 1, 1]} restitution={0} friction={100} />
 
-            <group castShadow ref={meshRef}>
+            <group ref={meshRef}>
                 <mesh>
                     <sphereGeometry />
                     <meshToonMaterial color={'pink'} gradientMap={gradientMap} />

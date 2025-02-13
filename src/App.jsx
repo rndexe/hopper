@@ -3,7 +3,6 @@ import { OrbitControls, KeyboardControls, Effects } from '@react-three/drei';
 import { Suspense } from 'react';
 import { Perf } from 'r3f-perf';
 import { Physics } from '@react-three/rapier';
-import Lights from './Lights';
 import Player from './Player';
 import Ground from './Ground';
 import MyCamera from './MyCamera';
@@ -18,7 +17,7 @@ export default function App() {
                 { name: 'right', keys: ['ArrowRight', 'KeyD'] },
                 { name: 'jump', keys: ['Space'] },
             ]}>
-            <Canvas shadows>
+            <Canvas>
                 {import.meta.env.DEV && <Perf minimal />}
                 <Experience />
                 <OrbitControls />
@@ -33,7 +32,6 @@ function Experience() {
             <Physics gravity={[0, -10, 0]} timeStep={'vary'}>
                 <Ground />
                 <Player />
-                <Lights />
                 <MyCamera />
             </Physics>
         </Suspense>
