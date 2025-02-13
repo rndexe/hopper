@@ -1,12 +1,12 @@
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, KeyboardControls } from '@react-three/drei';
+import { Canvas, extend } from '@react-three/fiber';
+import { OrbitControls, KeyboardControls, Effects } from '@react-three/drei';
 import { Suspense } from 'react';
 import { Perf } from 'r3f-perf';
 import { Physics } from '@react-three/rapier';
-import { R, theta } from './constants';
 import Lights from './Lights';
 import Player from './Player';
 import Ground from './Ground';
+import MyCamera from './MyCamera';
 
 export default function App() {
     return (
@@ -18,9 +18,8 @@ export default function App() {
                 { name: 'right', keys: ['ArrowRight', 'KeyD'] },
                 { name: 'jump', keys: ['Space'] },
             ]}>
-            <Canvas shadows camera={{ fov: 20, position: [0, R * Math.sin(theta), R * Math.cos(theta)] }}>
+            <Canvas shadows>
                 {import.meta.env.DEV && <Perf minimal />}
-
                 <Experience />
                 <OrbitControls />
             </Canvas>
@@ -31,10 +30,11 @@ export default function App() {
 function Experience() {
     return (
         <Suspense>
-            <Physics gravity={[0, -9.81, 0]} timeStep={'vary'} debug>
+            <Physics gravity={[0, -10, 0]} timeStep={'vary'}>
                 <Ground />
                 <Player />
                 <Lights />
+                <MyCamera />
             </Physics>
         </Suspense>
     );

@@ -3,7 +3,7 @@ import { Environment, SoftShadows } from '@react-three/drei';
 export default function Lights() {
     return (
         <>
-            <directionalLight
+            {/* <directionalLight
                 position={[0, 2, 0]}
                 castShadow
                 shadow-mapSize={[2048, 2048]}
@@ -14,8 +14,10 @@ export default function Lights() {
                 shadow-camera-top={50}
                 shadow-camera-bottom={-50}
                 shadow-bias={-0.002}
-            />
-            <Environment preset="forest" />
+            /> */}
+            {/* <directionalLight position={[1, 1, 1]} intensity={2}/> */}
+
+            {/* <Environment preset="forest" /> */}
             {/* <SoftShadows /> */}
         </>
     );
