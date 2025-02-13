@@ -33,6 +33,7 @@ export default function Player() {
             if (left) nextV.x -= maxV;
             if (right) nextV.x += maxV;
 
+            normalize(nextV, maxV);
             playerRef.current.setLinvel(nextV);
             meshRef.current.rotation.set(0, Math.atan2(nextV.x, nextV.z), 0); // Set rotation based on velocity
         }
@@ -66,4 +67,16 @@ export default function Player() {
             </group>
         </RigidBody>
     );
+}
+
+function normalize(v, length) {
+    const mag = Math.sqrt(v.x ** 2 + v.z ** 2);
+    if (mag === 0) {
+        v.x = v.z = 0; // Avoid division by zero
+        return;
+    }
+
+    const scale = length / mag;
+    v.x *= scale;
+    v.z *= scale;
 }
