@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { Outlines, useKeyboardControls, useTexture } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import { floorHeight } from './constants';
-import { createGradientTexture, mutation } from './utils';
+import { createGradientTexture, mutation, playAudio, normalize } from './utils';
 import Eyes from './Eyes';
 
 export default function Player() {
@@ -12,7 +12,7 @@ export default function Player() {
     const [sub, get] = useKeyboardControls();
 
     const gradientMap = useMemo(() => createGradientTexture(), []);
-    const jumpSound = useRef(new Audio('./slime_jump.mp3'));
+    const jumpSound = useRef(new Audio('./audio/slime_jump.mp3'));
 
     function jump(payload) {
         const isGroundCollision = payload ? payload.other.rigidBody.userData.name == 'ground' : true;
@@ -38,7 +38,7 @@ export default function Player() {
             normalize(nextV, maxV);
             playerRef.current.setLinvel(nextV, true);
             meshRef.current.rotation.set(0, Math.atan2(nextV.x, nextV.z), 0); // Set rotation based on velocity
-            playAudio(jumpSound.current);
+            playAudio(jumpSound.current,0.1);
         }
         if (playerRef.current && meshRef.current) {
             const vel = playerRef.current.linvel(); // Get current velocity
@@ -57,7 +57,7 @@ export default function Player() {
             lockRotations
             position-y={mutation.position[1]}
             colliders={false}>
-            <CuboidCollider args={[1, 1, 1]} restitution={0} friction={100} />
+            <CuboidCollider args={[0.9, 1, 0.9]} restitution={0} friction={100} />
 
             <group ref={meshRef}>
                 <mesh>
@@ -69,23 +69,4 @@ export default function Player() {
             </group>
         </RigidBody>
     );
-}
-
-function normalize(v, length) {
-    const mag = Math.sqrt(v.x ** 2 + v.z ** 2);
-    if (mag === 0) {
-        v.x = v.z = 0; // Avoid division by zero
-        return;
-    }
-
-    const scale = length / mag;
-    v.x *= scale;
-    v.z *= scale;
-}
-
-function playAudio(audio) {
-    audio.currentTime = 0;
-    audio.volume = 0.2;
-    audio.loop = false;
-    audio.play();
 }

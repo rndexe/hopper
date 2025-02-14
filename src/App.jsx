@@ -1,11 +1,13 @@
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, KeyboardControls } from '@react-three/drei';
+import { OrbitControls, KeyboardControls, Environment } from '@react-three/drei';
 import { Suspense } from 'react';
 import { Perf } from 'r3f-perf';
 import { Physics } from '@react-three/rapier';
 import Player from './Player';
 import Ground from './Ground';
 import MyCamera from './MyCamera';
+import Food from './Food';
+import { floorHeight } from './constants';
 
 export default function App() {
     return (
@@ -29,10 +31,12 @@ export default function App() {
 function Experience() {
     return (
         <Suspense>
-            <Physics gravity={[0, -10, 0]}>
+            <Physics gravity={[0, -10, 0]} debug={import.meta.env.DEV}>
                 <Ground />
                 <Player />
                 <MyCamera />
+                <Food/>
+                <Environment preset='city'/>
             </Physics>
         </Suspense>
     );

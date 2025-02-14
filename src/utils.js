@@ -23,9 +23,25 @@ export function createGradientTexture(mode = 'body') {
     return texture;
 }
 
+export function normalize(v, length) {
+    const mag = Math.sqrt(v.x ** 2 + v.z ** 2);
+    if (mag === 0) {
+        v.x = v.z = 0; // Avoid division by zero
+        return;
+    }
 
+    const scale = length / mag;
+    v.x *= scale;
+    v.z *= scale;
+}
 
+export function playAudio(audio, volume=1) {
+    audio.currentTime = 0;
+    audio.volume = volume;
+    audio.loop = false;
+    audio.play();
+}
 export const mutation = {
     isJumping: false,
-    position : {x:0, y:2, z:0}
+    position: { x: 0, y: 2, z: 0 },
 };
