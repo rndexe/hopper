@@ -4,6 +4,7 @@ import { useTexture, Box } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import { boundarySize, groundLevel } from './constants';
 import { mutation } from './utils';
+import { AdditiveBlending } from 'three';
 // import { Grid } from '@react-three/drei';
 
 export default function Ground() {
