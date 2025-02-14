@@ -7,20 +7,23 @@ Source: https://sketchfab.com/3d-models/asset-by-feyfolken-food-props-apple-3043
 Title: Asset by Feyfolken | Food Props | Apple
 */
 
+import { forwardRef } from 'react';
 import { Outlines, useGLTF } from '@react-three/drei';
 import { DoubleSide } from 'three';
 
-export default function Apple(props) {
+const Apple = forwardRef((props, ref) => {
     const { nodes, materials } = useGLTF('./apple/scene.gltf');
 
     return (
-        <group {...props} dispose={null}>
+        <group ref={ref} {...props} dispose={null}>
             <mesh geometry={nodes.Apple_0.geometry} rotation={[-Math.PI / 2, 0, 0]}>
                 <meshStandardMaterial map={materials.Apple.map} color={'#d4d4d4'} side={DoubleSide} />
                 <Outlines screenspace thickness={0.002} />
             </mesh>
         </group>
     );
-}
+});
 
 useGLTF.preload('./apple/scene.gltf');
+
+export default Apple;

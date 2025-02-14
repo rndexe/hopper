@@ -7,7 +7,7 @@ import Player from './Player';
 import Ground from './Ground';
 import MyCamera from './MyCamera';
 import Food from './Food';
-import { floorHeight } from './constants';
+import { groundLevel } from './constants';
 
 export default function App() {
     return (
