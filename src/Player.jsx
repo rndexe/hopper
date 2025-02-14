@@ -56,7 +56,7 @@ export default function Player() {
             lockRotations
             position-y={mutation.position[1]}
             colliders={false}>
-            <CuboidCollider args={[0.9, 1, 0.9]} restitution={0} friction={100} />
+            <CuboidCollider args={[0.8, 1, 0.8]} restitution={0} friction={100} />
 
             <group ref={meshRef}>
                 <mesh>

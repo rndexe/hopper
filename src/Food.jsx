@@ -56,7 +56,7 @@ function Fruit({ position }) {
             onIntersectionEnter={handleIntersection}
             ref={appleRef}
             colliders={false}>
-            <CuboidCollider args={[1, 1, 1]} scale={0.05} />
+            <CuboidCollider args={[1, 1, 1]} scale={0.03} />
             <Apple ref={meshRef} />
 
             <mesh rotation-x={-Math.PI / 2} position-y={-0.1} scale={0.2}>
