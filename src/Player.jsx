@@ -12,11 +12,13 @@ export default function Player() {
     const [sub, get] = useKeyboardControls();
 
     const gradientMap = useMemo(() => createGradientTexture(), []);
+    const jumpSound = useRef(new Audio('./slime_jump.mp3'));
 
     function jump(payload) {
         const isGroundCollision = payload ? payload.other.rigidBody.userData.name == 'ground' : true;
         if (isGroundCollision) {
             mutation.isJumping = false;
+            if (isKeyPressed) playAudio(jumpSound.current);
         }
     }
 
@@ -34,8 +36,9 @@ export default function Player() {
             if (right) nextV.x += maxV;
 
             normalize(nextV, maxV);
-            playerRef.current.setLinvel(nextV);
+            playerRef.current.setLinvel(nextV, true);
             meshRef.current.rotation.set(0, Math.atan2(nextV.x, nextV.z), 0); // Set rotation based on velocity
+            playAudio(jumpSound.current);
         }
         if (playerRef.current && meshRef.current) {
             const vel = playerRef.current.linvel(); // Get current velocity
@@ -52,7 +55,6 @@ export default function Player() {
             ref={playerRef}
             onCollisionEnter={jump}
             lockRotations
-            canSleep={false}
             position-y={mutation.position[1]}
             colliders={false}>
             <CuboidCollider args={[1, 1, 1]} restitution={0} friction={100} />
@@ -79,4 +81,11 @@ function normalize(v, length) {
     const scale = length / mag;
     v.x *= scale;
     v.z *= scale;
+}
+
+function playAudio(audio) {
+    audio.currentTime = 0;
+    audio.volume = 0.2;
+    audio.loop = false;
+    audio.play();
 }

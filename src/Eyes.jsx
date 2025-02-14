@@ -14,11 +14,13 @@ export default function Eyes() {
             const nextBlink = MathUtils.randInt(3000, 4000);
             setTimeout(blink, nextBlink);
             if (mutation.isJumping) return;
-            
-            gsap.to(eyesRef.current.scale, { y: 0.1, duration: 0.1, ease: 'power2.in' });
-            gsap.to(eyesRef.current.scale, { y: 1, duration: 0.1, ease: 'power2.out', delay: 0.1 });
-            gsap.to(eyesRef.current.scale, { y: 0.1, duration: 0.1, ease: 'power2.in', delay: 0.3 });
-            gsap.to(eyesRef.current.scale, { y: 1, duration: 0.1, ease: 'power2.out', delay: 0.4 });
+
+            if (eyesRef.current) {
+                gsap.to(eyesRef.current.scale, { y: 0.1, duration: 0.1, ease: 'power2.in' });
+                gsap.to(eyesRef.current.scale, { y: 1, duration: 0.1, ease: 'power2.out', delay: 0.1 });
+                gsap.to(eyesRef.current.scale, { y: 0.1, duration: 0.1, ease: 'power2.in', delay: 0.3 });
+                gsap.to(eyesRef.current.scale, { y: 1, duration: 0.1, ease: 'power2.out', delay: 0.4 });
+            }
         };
 
         blink();

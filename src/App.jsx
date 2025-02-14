@@ -1,5 +1,5 @@
-import { Canvas, extend } from '@react-three/fiber';
-import { OrbitControls, KeyboardControls, Effects } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, KeyboardControls } from '@react-three/drei';
 import { Suspense } from 'react';
 import { Perf } from 'r3f-perf';
 import { Physics } from '@react-three/rapier';
@@ -29,7 +29,7 @@ export default function App() {
 function Experience() {
     return (
         <Suspense>
-            <Physics gravity={[0, -10, 0]} timeStep={'vary'}>
+            <Physics gravity={[0, -10, 0]}>
                 <Ground />
                 <Player />
                 <MyCamera />
