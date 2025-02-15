@@ -35,8 +35,8 @@ function Experience() {
                 <Ground />
                 <Player />
                 <MyCamera />
-                <Food/>
-                <Environment preset='city'/>
+                <Food />
+                <Environment preset="city" />
             </Physics>
         </Suspense>
     );

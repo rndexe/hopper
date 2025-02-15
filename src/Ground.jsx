@@ -4,8 +4,6 @@ import { useTexture, Box } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import { boundarySize, groundLevel } from './constants';
 import { mutation } from './utils';
-import { AdditiveBlending } from 'three';
-// import { Grid } from '@react-three/drei';
 
 export default function Ground() {
     return (
@@ -22,10 +20,16 @@ export default function Ground() {
 
 function GrassPlane() {
     return (
-        <mesh rotation-x={-Math.PI / 2} scale={[50, 50, 1]} position-y={groundLevel - 0.2}>
-            <planeGeometry args={[10, 10]} />
-            <meshBasicMaterial color={'#4ade80'} />
-        </mesh>
+        <>
+            <mesh position={[5, -0.4, 5]}>
+                <cylinderGeometry />
+                <meshStandardMaterial color={'darkgreen'} />
+            </mesh>
+            <mesh rotation-x={-Math.PI / 2} scale={[boundarySize, boundarySize, 1]} position-y={groundLevel - 0.2}>
+                <planeGeometry args={[2, 2]} />
+                <meshBasicMaterial color={'#22c55e'} />
+            </mesh>
+        </>
     );
 }
 
