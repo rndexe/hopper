@@ -26,7 +26,6 @@ export default function Food() {
 function Fruit({ position }) {
     const appleRef = useRef();
     const meshRef = useRef();
-    const shadowRef = useRef();
     const shadowTexture = useTexture('./shadow.jpg');
     const eatSound = useRef(new Audio('./audio/pop.mp3'));
     const fruitHeight = useMemo(() => groundLevel + 1, []);
@@ -36,7 +35,7 @@ function Fruit({ position }) {
         const pos = appleRef.current.translation();
         appleRef.current.setTranslation({ x: pos.x, y: -5, z: pos.z });
         playAudio(eatSound.current);
-        setTimeout(reset, 2000);
+        setTimeout(reset, 5000);
     };
 
     const reset = () => {

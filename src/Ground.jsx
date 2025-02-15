@@ -22,7 +22,7 @@ export default function Ground() {
 
 function GrassPlane() {
     return (
-        <mesh rotation-x={-Math.PI / 2} scale={[10, 10, 1]} position-y={groundLevel - 0.2}>
+        <mesh rotation-x={-Math.PI / 2} scale={[50, 50, 1]} position-y={groundLevel - 0.2}>
             <planeGeometry args={[10, 10]} />
             <meshBasicMaterial color={'#4ade80'} />
         </mesh>
