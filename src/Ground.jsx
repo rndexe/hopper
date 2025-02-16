@@ -51,7 +51,7 @@ function ShadowPlane() {
 
 function BoxBoundary() {
     return (
-        <RigidBody type="fixed" restitution={1} colliders={false}>
+        <RigidBody type="fixed" restitution={1}>
             {Array.from({ length: 12 }, (_, i) => {
                 const angle = (i / 12) * Math.PI * 2;
                 return (

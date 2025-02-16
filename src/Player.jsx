@@ -37,7 +37,7 @@ export default function Player() {
             normalize(nextV, maxV);
             playerRef.current.setLinvel(nextV, true);
             meshRef.current.rotation.set(0, Math.atan2(nextV.x, nextV.z), 0); // Set rotation based on velocity
-            playAudio(jumpSound.current,0.1);
+            playAudio(jumpSound.current, 0.1);
         }
         if (playerRef.current && meshRef.current) {
             const vel = playerRef.current.linvel(); // Get current velocity
@@ -50,12 +50,7 @@ export default function Player() {
     });
 
     return (
-        <RigidBody
-            ref={playerRef}
-            onCollisionEnter={jump}
-            lockRotations
-            position-y={mutation.position[1]}
-            colliders={false}>
+        <RigidBody ref={playerRef} onCollisionEnter={jump} lockRotations position-y={mutation.position[1]}>
             <CuboidCollider args={[0.8, 1, 0.8]} restitution={0} friction={100} />
 
             <group ref={meshRef}>

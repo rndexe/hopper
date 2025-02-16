@@ -7,7 +7,6 @@ import Player from './Player';
 import Ground from './Ground';
 import MyCamera from './MyCamera';
 import Food from './Food';
-import { groundLevel } from './constants';
 
 export default function App() {
     return (
@@ -31,12 +30,12 @@ export default function App() {
 function Experience() {
     return (
         <Suspense>
-            <Physics gravity={[0, -10, 0]} debug={import.meta.env.DEV}>
+            <Physics gravity={[0, -10, 0]} debug={import.meta.env.DEV} colliders={false}>
                 <Ground />
                 <Player />
                 <MyCamera />
                 <Food />
-                <Environment preset="city" />
+                <Environment files="./potsdamer_platz_1k.jpg" />
             </Physics>
         </Suspense>
     );
