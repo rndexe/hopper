@@ -43,6 +43,9 @@ function BoxBoundary() {
                     />
                 );
             })}
+            <CuboidCollider args={[1, 1, 1]} position={[-11, groundLevel + 1, 1]} />
+            <CuboidCollider args={[2, 1, 2]} position={[17, groundLevel + 1, 5]} />
+            <CuboidCollider args={[1.8, 1, 1.5]} position={[6, groundLevel + 1, -13]} />
         </RigidBody>
     );
 }

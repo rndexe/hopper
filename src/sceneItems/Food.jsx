@@ -9,7 +9,7 @@ import Apple from './AppleModel';
 
 export default function Food() {
     const fruitPositions = useMemo(() => {
-        return Array.from({ length: 5 }, () => {
+        return Array.from({ length: 2 }, () => {
             const { x, z } = getRandomPosition();
             return [x, groundLevel + 1, z];
         });
