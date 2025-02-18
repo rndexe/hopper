@@ -3,10 +3,11 @@ import { OrbitControls, KeyboardControls, Environment } from '@react-three/drei'
 import { Suspense } from 'react';
 import { Perf } from 'r3f-perf';
 import { Physics } from '@react-three/rapier';
-import Player from './Player';
+import Player from './player/Player';
 import Ground from './Ground';
 import MyCamera from './MyCamera';
-import Food from './Food';
+import Food from './sceneItems/Food';
+import { ACESFilmicToneMapping, AgXToneMapping, NoToneMapping, ReinhardToneMapping, CineonToneMapping, NeutralToneMapping, LinearToneMapping } from 'three';
 
 export default function App() {
     return (
@@ -18,7 +19,7 @@ export default function App() {
                 { name: 'right', keys: ['ArrowRight', 'KeyD'] },
                 { name: 'jump', keys: ['Space'] },
             ]}>
-            <Canvas>
+            <Canvas shadows gl={{toneMapping: ACESFilmicToneMapping}}>
                 {import.meta.env.DEV && <Perf minimal />}
                 <Experience />
                 <OrbitControls />
@@ -35,7 +36,7 @@ function Experience() {
                 <Player />
                 <MyCamera />
                 <Food />
-                <Environment files="./potsdamer_platz_1k.jpg" />
+                <Environment files="./potsdamer_platz_1k.jpg" environmentIntensity={0.5} />
             </Physics>
         </Suspense>
     );

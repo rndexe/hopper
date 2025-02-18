@@ -22,3 +22,6 @@ dist
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# assets downloaded, not to be used
+public/test_assets

@@ -2,7 +2,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { MathUtils } from 'three';
 import { useRef, useMemo } from 'react';
-import { createGradientTexture, mutation } from './utils';
+import { createGradientTexture, mutation } from '../utils';
 
 gsap.registerPlugin(useGSAP);
 

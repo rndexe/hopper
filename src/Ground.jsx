@@ -1,9 +1,10 @@
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { useTexture, Box } from '@react-three/drei';
+import { useTexture } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
-import { boundarySize, groundLevel } from './constants';
+import { groundLevel } from './constants';
 import { mutation } from './utils';
+import GrassPlane from './sceneItems/GrassPlane';
 
 export default function Ground() {
     return (
@@ -12,28 +13,12 @@ export default function Ground() {
                 <CuboidCollider args={[50, groundLevel, 50]} />
             </RigidBody>
             <GrassPlane />
-            <ShadowPlane />
-            <BoxBoundary />
+            <PlayerShadow />
         </>
     );
 }
 
-function GrassPlane() {
-    return (
-        <>
-            <mesh position={[5, -0.4, 5]}>
-                <cylinderGeometry />
-                <meshStandardMaterial color={'darkgreen'} />
-            </mesh>
-            <mesh rotation-x={-Math.PI / 2} scale={[boundarySize, boundarySize, 1]} position-y={groundLevel - 0.2}>
-                <planeGeometry args={[2, 2]} />
-                <meshBasicMaterial color={'#22c55e'} />
-            </mesh>
-        </>
-    );
-}
-
-function ShadowPlane() {
+function PlayerShadow() {
     const shadowTexture = useTexture('./shadow.jpg');
     const shadowRef = useRef();
     useFrame((state, delta) => {
@@ -43,30 +28,8 @@ function ShadowPlane() {
     });
     return (
         <mesh rotation-x={-Math.PI / 2} position-y={groundLevel - 0.01} ref={shadowRef} scale={4}>
-            <planeGeometry args={[1, 1]} />
+            <planeGeometry />
             <meshBasicMaterial color={'black'} transparent alphaMap={shadowTexture} opacity={1} />
         </mesh>
-    );
-}
-
-function BoxBoundary() {
-    return (
-        <RigidBody type="fixed" restitution={1}>
-            {Array.from({ length: 12 }, (_, i) => {
-                const angle = (i / 12) * Math.PI * 2;
-                return (
-                    <CuboidCollider
-                        key={i}
-                        args={[1, 2, boundarySize * Math.tan(Math.PI / 12)]}
-                        position={[
-                            Math.cos(angle) * (boundarySize + 1),
-                            groundLevel + 2,
-                            Math.sin(angle) * (boundarySize + 1),
-                        ]}
-                        rotation={[0, -angle, 0]}
-                    />
-                );
-            })}
-        </RigidBody>
     );
 }

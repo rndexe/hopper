@@ -1,11 +1,11 @@
 import { useMemo, useRef } from 'react';
-import { AdditiveBlending, MathUtils, NoBlending, SubtractiveBlending } from 'three';
+import { MathUtils } from 'three';
 import { useFrame } from '@react-three/fiber';
 import { useTexture } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
-import { groundLevel } from './constants';
-import { playAudio } from './utils';
-import Apple from './Apple';
+import { groundLevel } from '../constants';
+import { playAudio } from '../utils';
+import Apple from './AppleModel';
 
 export default function Food() {
     const fruitPositions = useMemo(() => {
@@ -53,14 +53,19 @@ function Fruit({ position }) {
             scale={10}
             sensor
             onIntersectionEnter={handleIntersection}
-            ref={appleRef}
-            colliders={false}>
+            ref={appleRef}>
             <CuboidCollider args={[1, 1, 1]} scale={0.03} />
             <Apple ref={meshRef} />
 
             <mesh rotation-x={-Math.PI / 2} position-y={-0.1} scale={0.2}>
                 <planeGeometry args={[1, 1]} />
-                <meshBasicMaterial color={'black'} transparent alphaMap={shadowTexture} opacity={0.2} depthWrite={false} />
+                <meshBasicMaterial
+                    color={'black'}
+                    transparent
+                    alphaMap={shadowTexture}
+                    opacity={0.2}
+                    depthWrite={false}
+                />
             </mesh>
         </RigidBody>
     );
