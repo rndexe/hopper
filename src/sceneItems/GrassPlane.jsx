@@ -14,14 +14,16 @@ export default function GrassPlane() {
 
 function BigGroundPlane() {
     return (
-        <mesh
-            rotation-x={-Math.PI / 2}
-            scale={[2 * boundarySize, 2 * boundarySize, 1]}
-            position-y={groundLevel - 0.2}
-            receiveShadow>
-            <circleGeometry />
-            <meshStandardMaterial color={'rgb(77, 180, 73)'} />
-        </mesh>
+        <group rotation-x={-Math.PI / 2} position-y={groundLevel - 0.2}>
+            <mesh scale={[1.7 * boundarySize, 1.7 * boundarySize, 1]} receiveShadow>
+                <circleGeometry />
+                <meshStandardMaterial color={'rgb(77, 180, 73)'} />
+            </mesh>
+            <mesh scale={[4 * boundarySize, 4 * boundarySize, 1]} position-z={-0.1}>
+                <circleGeometry/>
+                <meshStandardMaterial color={'rgb(0, 39, 8)'} />
+            </mesh>
+        </group>
     );
 }
 

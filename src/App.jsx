@@ -7,7 +7,7 @@ import Player from './player/Player';
 import Ground from './Ground';
 import MyCamera from './MyCamera';
 import Food from './sceneItems/Food';
-import { ACESFilmicToneMapping, AgXToneMapping, NoToneMapping, ReinhardToneMapping, CineonToneMapping, NeutralToneMapping, LinearToneMapping } from 'three';
+import { ACESFilmicToneMapping } from 'three';
 
 export default function App() {
     return (
@@ -19,7 +19,7 @@ export default function App() {
                 { name: 'right', keys: ['ArrowRight', 'KeyD'] },
                 { name: 'jump', keys: ['Space'] },
             ]}>
-            <Canvas shadows gl={{toneMapping: ACESFilmicToneMapping}}>
+            <Canvas shadows gl={{ toneMapping: ACESFilmicToneMapping }}>
                 {import.meta.env.DEV && <Perf minimal />}
                 <Experience />
                 <OrbitControls />
