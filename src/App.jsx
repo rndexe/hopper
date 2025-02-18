@@ -1,13 +1,13 @@
+import { ACESFilmicToneMapping } from 'three';
+import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, KeyboardControls, Environment } from '@react-three/drei';
-import { Suspense } from 'react';
 import { Perf } from 'r3f-perf';
 import { Physics } from '@react-three/rapier';
 import Player from './player/Player';
 import Ground from './Ground';
 import MyCamera from './MyCamera';
 import Food from './sceneItems/Food';
-import { ACESFilmicToneMapping } from 'three';
 
 export default function App() {
     return (
@@ -22,7 +22,7 @@ export default function App() {
             <Canvas shadows gl={{ toneMapping: ACESFilmicToneMapping }}>
                 {import.meta.env.DEV && <Perf minimal />}
                 <Experience />
-                <OrbitControls />
+                {import.meta.env.DEV && <OrbitControls />}
             </Canvas>
         </KeyboardControls>
     );
@@ -36,7 +36,7 @@ function Experience() {
                 <Player />
                 <MyCamera />
                 <Food />
-                <Environment files="./potsdamer_platz_1k.jpg" environmentIntensity={0.5} />
+                <Environment files="./dikhololo_night_1k.jpg" environmentIntensity={0.1} />
             </Physics>
         </Suspense>
     );

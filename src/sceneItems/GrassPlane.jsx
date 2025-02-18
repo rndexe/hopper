@@ -17,7 +17,7 @@ function BigGroundPlane() {
         <group rotation-x={-Math.PI / 2} position-y={groundLevel - 0.2}>
             <mesh scale={[1.7 * boundarySize, 1.7 * boundarySize, 1]} receiveShadow>
                 <circleGeometry />
-                <meshStandardMaterial color={'rgb(77, 180, 73)'} />
+                <meshStandardMaterial color={'rgb(109, 197, 106)'} />
             </mesh>
             <mesh scale={[4 * boundarySize, 4 * boundarySize, 1]} position-z={-0.1}>
                 <circleGeometry/>
