@@ -2,7 +2,8 @@ import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Outlines, useKeyboardControls } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
-import { createGradientTexture, mutation, playAudio, normalize } from '../utils';
+import { createGradientTexture, playAudio, normalize } from '../utils';
+import { mutation } from '../store';
 import Eyes from './Eyes';
 
 export default function Player() {

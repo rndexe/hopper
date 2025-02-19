@@ -41,7 +41,4 @@ export function playAudio(audio, volume=1) {
     audio.loop = false;
     audio.play();
 }
-export const mutation = {
-    isJumping: false,
-    position: { x: 0, y: 2, z: 0 },
-};
+

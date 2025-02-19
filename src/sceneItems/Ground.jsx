@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { useTexture } from '@react-three/drei';
+import { SoftShadows, useTexture } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
-import { groundLevel } from './constants';
-import { mutation } from './utils';
-import GrassPlane from './sceneItems/GrassPlane';
+import { groundLevel } from '../constants';
+import { mutation } from '../store';
+import GrassPlane from './GrassPlane';
 
 export default function Ground() {
     return (
@@ -14,6 +14,7 @@ export default function Ground() {
             </RigidBody>
             <GrassPlane />
             <PlayerShadow />
+            {/* <SoftShadows size={100} samples={20}/> */}
         </>
     );
 }

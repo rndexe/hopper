@@ -1,6 +1,8 @@
 import { RigidBody, CuboidCollider } from '@react-three/rapier';
 import { boundarySize, groundLevel } from '../constants';
 import Scenery from './Scenery';
+import Food from './Food';
+import Fireflies from './Fireflies';
 
 export default function GrassPlane() {
     return (
@@ -8,6 +10,8 @@ export default function GrassPlane() {
             <Scenery />
             <BigGroundPlane />
             <BoxBoundary />
+            <Fireflies />
+            <Food />
         </>
     );
 }
@@ -15,13 +19,13 @@ export default function GrassPlane() {
 function BigGroundPlane() {
     return (
         <group rotation-x={-Math.PI / 2} position-y={groundLevel - 0.2}>
-            <mesh scale={[1.7 * boundarySize, 1.7 * boundarySize, 1]} receiveShadow>
+            <mesh scale={[1.8 * boundarySize, 1.8 * boundarySize, 1]} receiveShadow>
                 <circleGeometry />
                 <meshStandardMaterial color={'rgb(109, 197, 106)'} />
             </mesh>
             <mesh scale={[4 * boundarySize, 4 * boundarySize, 1]} position-z={-0.1}>
-                <circleGeometry/>
-                <meshStandardMaterial color={'rgb(0, 39, 8)'} />
+                <circleGeometry />
+                <meshStandardMaterial color={'rgb(4, 56, 15)'} />
             </mesh>
         </group>
     );
