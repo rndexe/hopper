@@ -1,11 +1,10 @@
 import { useMemo, useRef } from 'react';
-import { MathUtils } from 'three';
 import { useFrame } from '@react-three/fiber';
 import { useTexture } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import { groundLevel } from '../constants';
-import { playAudio } from '../utils';
-import Apple from './AppleModel';
+import { playAudio, getRandomPosition } from '../utils';
+import Apple from '../models/AppleModel';
 
 export default function Food() {
     const fruitPositions = useMemo(() => {
@@ -69,10 +68,4 @@ function Fruit({ position }) {
             </mesh>
         </RigidBody>
     );
-}
-
-function getRandomPosition() {
-    const angle = Math.random() * Math.PI * 2;
-    const radius = MathUtils.lerp(1, 20, Math.random());
-    return { x: Math.cos(angle) * radius, z: Math.sin(angle) * radius };
 }

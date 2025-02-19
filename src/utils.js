@@ -1,4 +1,4 @@
-import { DataTexture, NearestFilter, RedFormat } from 'three';
+import { DataTexture, NearestFilter, RedFormat, MathUtils } from 'three';
 
 export function createGradientTexture(mode = 'body') {
     const size = 15; // Number of gradient steps
@@ -35,10 +35,15 @@ export function normalize(v, length) {
     v.z *= scale;
 }
 
-export function playAudio(audio, volume=1) {
+export function getRandomPosition() {
+    const angle = Math.random() * Math.PI * 2;
+    const radius = MathUtils.lerp(1, 20, Math.random());
+    return { x: Math.cos(angle) * radius, z: Math.sin(angle) * radius };
+}
+
+export function playAudio(audio, volume = 1) {
     audio.currentTime = 0;
     audio.volume = volume;
     audio.loop = false;
     audio.play();
 }
-

@@ -1,6 +1,6 @@
 import { useGLTF } from '@react-three/drei';
-import {} from 'react';
 import { RigidBody, CuboidCollider } from '@react-three/rapier';
+
 export default function Colliders() {
     const { scene } = useGLTF('./models/colliders.glb');
 

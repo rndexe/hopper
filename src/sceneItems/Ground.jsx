@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { SoftShadows, useTexture } from '@react-three/drei';
+import { useTexture } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import { boundarySize, groundLevel } from '../constants';
 import { mutation } from '../store';
@@ -10,7 +10,7 @@ export default function Ground() {
     return (
         <>
             <RigidBody type="fixed" userData={{ name: 'ground' }} restitution={0}>
-                <CuboidCollider args={[1.8*boundarySize, groundLevel, 1.8*boundarySize]} />
+                <CuboidCollider args={[1.8 * boundarySize, groundLevel, 1.8 * boundarySize]} />
             </RigidBody>
             <GrassPlane />
             <PlayerShadow />
