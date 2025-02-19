@@ -10,7 +10,7 @@ export default function GrassPlane() {
             <Scenery />
             <BigGroundPlane />
             <BoxBoundary />
-            <Fireflies />
+            <Fireflies count={10}/>
             <Food />
         </>
     );

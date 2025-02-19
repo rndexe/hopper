@@ -1,5 +1,5 @@
-import { Color } from 'three';
-import { useRef, useEffect } from 'react';
+import { Color, MathUtils } from 'three';
+import { useRef, useMemo } from 'react';
 import { useThree, extend } from '@react-three/fiber';
 import { shaderMaterial, Sparkles } from '@react-three/drei';
 import { gsap } from 'gsap';
@@ -57,13 +57,12 @@ const SparkleMaterial = shaderMaterial(
 
 extend({ SparkleMaterial });
 
-function Firefly({ position }) {
+function Firefly(props) {
     const dpr = useThree((state) => state.viewport.dpr);
     const ref = useRef();
     const time = useGame((s) => s.time);
 
     useGSAP(() => {
-        // ref.current.visible = isNight;
         if (time == 'noon') gsap.to(ref.current.material, { opcty: 1, duration: 5 });
         else if (time == 'night') gsap.to(ref.current.material.clr, { r: 1, g: 0.8, b: 1, duration: 5 });
         else if (time == 'morning') {
@@ -73,17 +72,18 @@ function Firefly({ position }) {
     }, [time]);
 
     return (
-        <Sparkles ref={ref} count={10} scale={[5, 1, 5]} size={20} position={position} noise={20}>
+        <Sparkles ref={ref} scale={[5, 1, 5]} {...props}>
             <sparkleMaterial key={SparkleMaterial.key} transparent pixelRatio={dpr} depthWrite={false} />
         </Sparkles>
     );
 }
 
-export default function Fireflies() {
+export default function Fireflies({ count }) {
+    const sizes = useMemo(() => Float32Array.from({ length: count }, () => MathUtils.randFloat(10, 20)), [count]);
     return (
         <>
-            <Firefly position={[10, 2, 10]} />
-            <Firefly position={[-18, 2, 0]} />
+            <Firefly count={count} position={[10, 2, 10]} size={sizes} />
+            <Firefly count={count} position={[-18, 2, 0]} size={sizes} />
         </>
     );
 }
