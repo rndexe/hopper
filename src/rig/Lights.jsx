@@ -12,57 +12,45 @@ export default function Light() {
     const colorDusk = new Color('rgb(207, 157, 82)');
     const colorNight = new Color('rgb(106, 130, 207)');
 
-    const dayTime = 5;
-    const nightTime = 5;
-    const duskTime = 1;
-    const changeDuration = 5;
+    const testScale = import.meta.env.DEV ? 0.5 : 1;
+
+    const dayTime = 15 * testScale;
+    const nightTime = 15 * testScale;
+    const duskTime = 5 * testScale;
+    const changeDuration = 5 * testScale;
 
     useGSAP(() => {
         if (lightRef.current) {
             gsap.timeline({
                 repeat: -1,
                 paused: false,
+                defaults: { duration: changeDuration },
             })
                 .to(lightRef.current.color, {
                     r: colorDusk.r,
                     g: colorDusk.g,
                     b: colorDusk.b,
-                    duration: changeDuration,
                     delay: dayTime,
                     onStart: () => {
-                        console.log('noon transition started');
                         setTime('noon');
-                    },
-                    onComplete: () => {
-                        console.log('noon transition completed');
                     },
                 })
                 .to(lightRef.current.color, {
                     r: colorNight.r,
                     g: colorNight.g,
                     b: colorNight.b,
-                    duration: changeDuration,
                     delay: duskTime,
                     onStart: () => {
-                        console.log('night transition started');
                         setTime('night');
-                    },
-                    onComplete: () => {
-                        console.log('night transition completed');
                     },
                 })
                 .to(lightRef.current.color, {
                     r: colorDay.r,
                     g: colorDay.g,
                     b: colorDay.b,
-                    duration: changeDuration,
                     delay: nightTime,
                     onStart: () => {
-                        console.log('day transition started');
                         setTime('morning');
-                    },
-                    onComplete: () => {
-                        console.log('day transition completed');
                     },
                 });
         }
