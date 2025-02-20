@@ -64,6 +64,7 @@ export function JoystickControls() {
                 baseRadius={45}
                 controllerRadius={30}
                 className={'joystick'}
+                throttle={200}
                 onDirectionChange={handleJoystick}
             />
         )
