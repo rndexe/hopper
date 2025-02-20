@@ -1,9 +1,8 @@
 import { Vector3 } from 'three';
 import { useFrame } from '@react-three/fiber';
 import { PerspectiveCamera } from '@react-three/drei';
+import { mutation, groundLevel } from '../store';
 import Light from './Lights';
-import { mutation } from '../store';
-import { groundLevel } from '../store';
 
 export default function Camera() {
     const target = new Vector3();

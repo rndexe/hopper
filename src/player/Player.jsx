@@ -5,6 +5,7 @@ import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import { createGradientTexture, playAudio, normalize } from '../utils';
 import { mutation } from '../store';
 import Eyes from './Eyes';
+import { PlayerShadow } from './PlayerShadow';
 
 export default function Player() {
     const playerRef = useRef();
@@ -51,17 +52,20 @@ export default function Player() {
     });
 
     return (
-        <RigidBody ref={playerRef} onCollisionEnter={jump} lockRotations position-y={mutation.position[1]}>
-            <CuboidCollider args={[0.8, 1, 0.8]} restitution={0} friction={100} />
+        <>
+            <RigidBody ref={playerRef} onCollisionEnter={jump} lockRotations position-y={mutation.position[1]}>
+                <CuboidCollider args={[0.8, 1, 0.8]} restitution={0} friction={100} />
 
-            <group ref={meshRef}>
-                <mesh>
-                    <sphereGeometry />
-                    <meshToonMaterial color={'pink'} gradientMap={gradientMap} />
-                    <Outlines screenspace thickness={0.02} />
-                </mesh>
-                <Eyes />
-            </group>
-        </RigidBody>
+                <group ref={meshRef}>
+                    <mesh>
+                        <sphereGeometry />
+                        <meshToonMaterial color={'pink'} gradientMap={gradientMap} />
+                        <Outlines screenspace thickness={0.02} />
+                    </mesh>
+                    <Eyes />
+                </group>
+            </RigidBody>
+            <PlayerShadow />
+        </>
     );
 }

@@ -5,8 +5,8 @@ import { OrbitControls, KeyboardControls, Environment } from '@react-three/drei'
 import { Perf } from 'r3f-perf';
 import { Physics } from '@react-three/rapier';
 import Player from './player/Player';
-import Ground from './sceneItems/Ground';
-import Camera from './rig/Camera';
+import Ground from './components/Ground';
+import Camera from './components/Camera';
 
 export default function App() {
     return (
@@ -20,22 +20,17 @@ export default function App() {
             ]}>
             <Canvas shadows gl={{ toneMapping: ACESFilmicToneMapping }}>
                 {import.meta.env.DEV && <Perf minimal />}
-                <Experience />
                 {import.meta.env.DEV && <OrbitControls />}
+
+                <Suspense>
+                    <Physics gravity={[0, -10, 0]} debug={import.meta.env.DEV} colliders={false}>
+                        <Ground />
+                        <Player />
+                        <Camera />
+                        <Environment files="./dikhololo_night_1k.jpg" environmentIntensity={0.1} />
+                    </Physics>
+                </Suspense>
             </Canvas>
         </KeyboardControls>
-    );
-}
-
-function Experience() {
-    return (
-        <Suspense>
-            <Physics gravity={[0, -10, 0]} debug={import.meta.env.DEV} colliders={false}>
-                <Ground />
-                <Player />
-                <Camera />
-                <Environment files="./dikhololo_night_1k.jpg" environmentIntensity={0.1} />
-            </Physics>
-        </Suspense>
     );
 }
