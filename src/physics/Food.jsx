@@ -46,14 +46,8 @@ function Fruit({ position }) {
         meshRef.current.position.y = 0.01 * Math.sin(2 * state.clock.elapsedTime + phase);
     });
     return (
-        <RigidBody
-            type="fixed"
-            position={position}
-            scale={10}
-            sensor
-            onIntersectionEnter={handleIntersection}
-            ref={appleRef}>
-            <CuboidCollider args={[1, 1, 1]} scale={0.03} />
+        <RigidBody type="fixed" position={position} scale={10} onIntersectionEnter={handleIntersection} ref={appleRef}>
+            <CuboidCollider args={[1, 1, 1]} scale={0.03} sensor />
             <Apple ref={meshRef} />
 
             <mesh rotation-x={-Math.PI / 2} position-y={-0.1} scale={0.2}>

@@ -1,7 +1,7 @@
 import { ACESFilmicToneMapping } from 'three';
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Environment } from '@react-three/drei';
+import { OrbitControls, Environment, Loader } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 import { Physics } from '@react-three/rapier';
 import { KeyboardControls, JoystickControls } from './components/Controls';
@@ -27,6 +27,7 @@ export default function App() {
             </Canvas>
             <KeyboardControls />
             <JoystickControls />
+            <Loader />
         </>
     );
 }
