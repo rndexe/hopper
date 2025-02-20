@@ -15,6 +15,7 @@
         "@react-three/fiber": "^8.17.12",
         "@react-three/rapier": "^1.5.0",
         "gsap": "^3.12.7",
+        "rc-joystick": "^1.0.5",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "three": "^0.170.0",

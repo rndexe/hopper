@@ -47,3 +47,7 @@ export function playAudio(audio, volume = 1) {
     audio.loop = false;
     audio.play();
 }
+
+export function isTouch() {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
+}

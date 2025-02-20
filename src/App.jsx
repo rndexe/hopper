@@ -4,10 +4,10 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 import { Physics } from '@react-three/rapier';
+import { KeyboardControls, JoystickControls } from './components/Controls';
 import Player from './player/Player';
 import Ground from './components/Ground';
 import Camera from './components/Camera';
-import KeyboardControls from './components/KeyboardControls';
 
 export default function App() {
     return (
@@ -26,6 +26,7 @@ export default function App() {
                 </Suspense>
             </Canvas>
             <KeyboardControls />
+            <JoystickControls />
         </>
     );
 }
