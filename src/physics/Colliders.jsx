@@ -5,7 +5,7 @@ export default function Colliders() {
     const { scene } = useGLTF('./models/colliders.glb');
 
     return (
-        <RigidBody type="fixed" restitution={1}>
+        <RigidBody type="fixed" restitution={1} position-y={1}>
             {scene.children.map((child) =>
                 child.isMesh ? (
                     <CuboidCollider

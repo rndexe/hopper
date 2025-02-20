@@ -28,7 +28,7 @@ export default function Player() {
 
         if (isKeyPressed && !mutation.isJumping) {
             mutation.isJumping = true;
-            const nextV = { x: 0, y: 5, z: 0 };
+            const nextV = { x: 0, y: mutation.jumpVelocity, z: 0 };
             const maxV = 2.5;
             if (forward) nextV.z -= maxV;
             if (back) nextV.z += maxV;
