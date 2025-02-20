@@ -12,7 +12,6 @@ export default function Colliders() {
                         key={child.uuid}
                         args={child.scale.toArray()} // Use scale as collider size
                         position={child.position.toArray()}
-                        // scale={[child.scale.x, 5, child.scale.z]}
                         rotation={child.rotation.toArray()}
                     />
                 ) : null,

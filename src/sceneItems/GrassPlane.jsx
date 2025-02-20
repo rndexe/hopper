@@ -1,8 +1,9 @@
-import { boundarySize, groundLevel } from '../constants';
+import { boundarySize, groundLevel } from '../store';
 import Scenery from '../models/SceneModel';
 import Food from '../physics/Food';
 import Fireflies from './Fireflies';
 import Colliders from '../physics/Colliders';
+import SleepArea from '../physics/SleepArea';
 
 export default function GrassPlane() {
     return (
@@ -10,6 +11,7 @@ export default function GrassPlane() {
             <Scenery />
             <BigGroundPlane />
             <Colliders />
+            <SleepArea />
             <Fireflies count={10} />
             <Food />
         </>

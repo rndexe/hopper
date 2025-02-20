@@ -2,7 +2,7 @@ import { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useTexture } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
-import { groundLevel } from '../constants';
+import { groundLevel } from '../store';
 import { playAudio, getRandomPosition } from '../utils';
 import Apple from '../models/AppleModel';
 

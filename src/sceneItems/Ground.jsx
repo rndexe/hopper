@@ -2,8 +2,7 @@ import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useTexture } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
-import { boundarySize, groundLevel } from '../constants';
-import { mutation } from '../store';
+import { mutation, boundarySize, groundLevel } from '../store';
 import GrassPlane from './GrassPlane';
 
 export default function Ground() {

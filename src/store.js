@@ -1,8 +1,11 @@
 import { create } from 'zustand';
 
+export const groundLevel = 0.25;
+export const boundarySize = 20;
+
 export const useGame = create((set, get) => {
     return {
-        time: "morning",
+        time: 'morning',
         setTime: (time) => set({ time: time }),
     };
 });
