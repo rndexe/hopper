@@ -14,4 +14,10 @@ export const mutation = {
     isJumping: false,
     position: { x: 0, y: 2, z: 0 },
     jumpVelocity: 5,
+    controls: {
+        forward: false,
+        back: false,
+        left: false,
+        right: false,
+    },
 };

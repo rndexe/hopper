@@ -10,7 +10,6 @@ import { PlayerShadow } from './PlayerShadow';
 export default function Player() {
     const playerRef = useRef();
     const meshRef = useRef();
-    const [sub, get] = useKeyboardControls();
 
     const gradientMap = useMemo(() => createGradientTexture(), []);
     const jumpSound = useRef(new Audio('./audio/slime_jump.mp3'));
@@ -24,7 +23,7 @@ export default function Player() {
     }
 
     useFrame((state, delta) => {
-        const { forward, back, left, right } = get();
+        const { forward, back, left, right } = mutation.controls;
         const isKeyPressed = forward || back || left || right;
 
         if (isKeyPressed && !mutation.isJumping) {

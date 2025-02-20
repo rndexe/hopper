@@ -1,23 +1,17 @@
 import { ACESFilmicToneMapping } from 'three';
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, KeyboardControls, Environment } from '@react-three/drei';
+import { OrbitControls, Environment } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 import { Physics } from '@react-three/rapier';
 import Player from './player/Player';
 import Ground from './components/Ground';
 import Camera from './components/Camera';
+import KeyboardControls from './components/KeyboardControls';
 
 export default function App() {
     return (
-        <KeyboardControls
-            map={[
-                { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
-                { name: 'back', keys: ['ArrowDown', 'KeyS'] },
-                { name: 'left', keys: ['ArrowLeft', 'KeyA'] },
-                { name: 'right', keys: ['ArrowRight', 'KeyD'] },
-                { name: 'jump', keys: ['Space'] },
-            ]}>
+        <>
             <Canvas shadows gl={{ toneMapping: ACESFilmicToneMapping }}>
                 {import.meta.env.DEV && <Perf minimal />}
                 {import.meta.env.DEV && <OrbitControls />}
@@ -31,6 +25,7 @@ export default function App() {
                     </Physics>
                 </Suspense>
             </Canvas>
-        </KeyboardControls>
+            <KeyboardControls />
+        </>
     );
 }
