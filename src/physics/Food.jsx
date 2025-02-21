@@ -25,7 +25,7 @@ export default function Food() {
 function Fruit({ position }) {
     const appleRef = useRef();
     const meshRef = useRef();
-    const shadowTexture = useTexture('./shadow.jpg');
+    const shadowTexture = useTexture('./images/shadow.jpg');
     const eatSound = useRef(new Audio('./audio/pop.mp3'));
     const fruitHeight = useMemo(() => groundLevel + 1, []);
     const phase = useMemo(() => Math.random());
