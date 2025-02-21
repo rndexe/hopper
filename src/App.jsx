@@ -21,7 +21,7 @@ export default function App() {
                         <Ground />
                         <Player />
                         <Camera />
-                        <Environment files="./dikhololo_night_1k.jpg" environmentIntensity={0.1} />
+                        <Environment files="./images/dikhololo_night_1k.jpg" environmentIntensity={0.1} />
                     </Physics>
                 </Suspense>
             </Canvas>

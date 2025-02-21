@@ -4,7 +4,7 @@ import { useTexture } from '@react-three/drei';
 import { mutation, groundLevel } from '../store';
 
 export function PlayerShadow() {
-    const shadowTexture = useTexture('./shadow.jpg');
+    const shadowTexture = useTexture('./images/shadow.jpg');
     const shadowRef = useRef();
     useFrame((state, delta) => {
         shadowRef.current.position.x = mutation.position.x;
