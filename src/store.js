@@ -6,7 +6,9 @@ export const boundarySize = 20;
 export const useGame = create((set, get) => {
     return {
         time: 'morning',
+        resetKey: 0,
         setTime: (time) => set({ time: time }),
+        reset: () => set((state) => ({ resetKey: state.resetKey + 1 })),
     };
 });
 
