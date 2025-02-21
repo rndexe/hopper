@@ -3,13 +3,15 @@ import { useFrame } from '@react-three/fiber';
 import { Outlines, useKeyboardControls } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import { createGradientTexture, playAudio, normalize } from '../utils';
-import { mutation } from '../store';
+import { mutation, useGame } from '../store';
 import Eyes from './Eyes';
 import { PlayerShadow } from './PlayerShadow';
 
 export default function Player() {
     const playerRef = useRef();
     const meshRef = useRef();
+    const resetKey = useGame((s) => s.resetKey);
+    const reset = useGame((s) => s.reset);
 
     const gradientMap = useMemo(() => createGradientTexture(), []);
     const jumpSound = useRef(new Audio('./audio/slime_jump.mp3'));
@@ -40,21 +42,23 @@ export default function Player() {
             meshRef.current.rotation.set(0, Math.atan2(nextV.x, nextV.z), 0); // Set rotation based on velocity
             playAudio(jumpSound.current, 0.1);
         }
+
+        // Squishing ball logic
         if (playerRef.current && meshRef.current) {
             const vel = playerRef.current.linvel(); // Get current velocity
             const scaleY = Math.abs(vel.y) / 20 + 1; // How much to stretch based on velocity
             meshRef.current.scale.lerp({ x: 1 / Math.sqrt(scaleY), y: scaleY, z: 1 / Math.sqrt(scaleY) }, 0.1); // Squish in other directions based on y- stretch
         }
-        mutation.position.x = playerRef.current.translation().x;
-        mutation.position.y = playerRef.current.translation().y;
-        mutation.position.z = playerRef.current.translation().z;
+
+        // Update position store
+        Object.assign(mutation.position, playerRef.current.translation());
+        if (mutation.position.y < -20) reset();
     });
 
     return (
-        <>
+        <group key={resetKey}>
             <RigidBody ref={playerRef} onCollisionEnter={jump} lockRotations position-y={mutation.position[1]}>
                 <CuboidCollider args={[0.8, 1, 0.8]} restitution={0} friction={100} />
-
                 <group ref={meshRef}>
                     <mesh>
                         <sphereGeometry />
@@ -65,6 +69,6 @@ export default function Player() {
                 </group>
             </RigidBody>
             <PlayerShadow />
-        </>
+        </group>
     );
 }
