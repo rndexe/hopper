@@ -21,3 +21,8 @@ body {
     left: 50%;
     transform: translateX(-50%);
 }
+
+@font-face {
+    font-family: 'Editundo';
+    src: url('./fonts/editundo.ttf');
+}
