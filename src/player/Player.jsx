@@ -1,18 +1,19 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Outlines, useKeyboardControls } from '@react-three/drei';
+import { Outlines } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import { createGradientTexture, playAudio, normalize } from '../utils';
 import { mutation, useGame } from '../store';
-import Eyes from './Eyes';
 import { PlayerShadow } from './PlayerShadow';
+import Eyes from './Eyes';
+import SpeechBubble from './SpeechBubble';
 
 export default function Player() {
     const playerRef = useRef();
     const meshRef = useRef();
     const resetKey = useGame((s) => s.resetKey);
     const reset = useGame((s) => s.reset);
-
+    const animation = useGame((s) => s.animation);
     const gradientMap = useMemo(() => createGradientTexture(), []);
     const jumpSound = useRef(new Audio('./audio/slime_jump.mp3'));
 
@@ -24,11 +25,16 @@ export default function Player() {
         }
     }
 
+    useEffect(() => {
+        if (animation == 'sleeping') {
+            meshRef.current.rotation.set(0, 0, 0);
+        }
+    }, [animation]);
+
     useFrame((state, delta) => {
         const { forward, back, left, right } = mutation.controls;
         const isKeyPressed = forward || back || left || right;
-
-        if (isKeyPressed && !mutation.isJumping) {
+        if (isKeyPressed && !mutation.isJumping && animation == 'idle') {
             mutation.isJumping = true;
             const nextV = { x: 0, y: mutation.jumpVelocity, z: 0 };
             const maxV = 2.5;
@@ -67,6 +73,7 @@ export default function Player() {
                     </mesh>
                     <Eyes />
                 </group>
+                <SpeechBubble />
             </RigidBody>
             <PlayerShadow />
         </group>

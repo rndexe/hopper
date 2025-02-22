@@ -1,31 +1,38 @@
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { MathUtils } from 'three';
 import { useRef, useMemo } from 'react';
-import { createGradientTexture } from '../utils';
-import { mutation } from '../store';
+import { createGradientTexture, useRandomInterval } from '../utils';
+import { mutation, useGame } from '../store';
 
 gsap.registerPlugin(useGSAP);
 
 export default function Eyes() {
     const eyesRef = useRef();
+    const animation = useGame((s) => s.animation);
+    useRandomInterval(
+        () => {
+            if (animation == 'idle') {
+                if (mutation.isJumping) return;
 
-    useGSAP(() => {
-        const blink = () => {
-            const nextBlink = MathUtils.randInt(3000, 4000);
-            setTimeout(blink, nextBlink);
-            if (mutation.isJumping) return;
-
-            if (eyesRef.current) {
-                gsap.to(eyesRef.current.scale, { y: 0.1, duration: 0.1, ease: 'power2.in' });
-                gsap.to(eyesRef.current.scale, { y: 1, duration: 0.1, ease: 'power2.out', delay: 0.1 });
-                gsap.to(eyesRef.current.scale, { y: 0.1, duration: 0.1, ease: 'power2.in', delay: 0.3 });
-                gsap.to(eyesRef.current.scale, { y: 1, duration: 0.1, ease: 'power2.out', delay: 0.4 });
+                if (eyesRef.current) {
+                    gsap.to(eyesRef.current.scale, { y: 0.1, duration: 0.1, ease: 'power2.in' });
+                    gsap.to(eyesRef.current.scale, { y: 1, duration: 0.1, ease: 'power2.out', delay: 0.1 });
+                    gsap.to(eyesRef.current.scale, { y: 0.1, duration: 0.1, ease: 'power2.in', delay: 0.3 });
+                    gsap.to(eyesRef.current.scale, { y: 1, duration: 0.1, ease: 'power2.out', delay: 0.4 });
+                }
             }
-        };
+        },
+        animation == 'idle' ? 2000 : null,
+        3000,
+    );
+    useGSAP(() => {
+        if (animation == 'sleeping') {
+            gsap.to(eyesRef.current.scale, { y: 0.1, duration: 1, ease: 'power2.in', delay: 1 });
+        } else if (animation == 'idle') {
+            gsap.to(eyesRef.current.scale, { y: 1, duration: 0.1, ease: 'power2.in', delay: 0.3 });
+        }
+    }, [animation]);
 
-        blink();
-    }, []);
     return (
         <group ref={eyesRef} position={[0, 0.3, 1]}>
             <Eye position={-0.35} />

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { mutation } from '../store';
+import { mutation, useGameActions } from '../store';
 import { isTouch } from '../utils';
 import Joystick from 'rc-joystick';
 
@@ -34,12 +34,15 @@ const keyMap = {
 };
 
 export function KeyboardControls() {
+    const { setUserInput } = useGameActions();
     function downHandler(e) {
         setKeyStore(e.code, true);
+        if (!e.repeat) setUserInput(true);
     }
 
     function upHandler(e) {
         setKeyStore(e.code, false);
+        setUserInput(false);
     }
 
     useEffect(() => {
@@ -82,5 +85,4 @@ function setKeyStore(code, bool) {
     } else {
         keys[direction] = bool;
     }
-    // console.log(keys);
 }

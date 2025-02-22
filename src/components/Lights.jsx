@@ -1,12 +1,12 @@
 import { Color } from 'three';
 import { useRef } from 'react';
-import { useGame } from '../store';
+import { useGameActions } from '../store';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 gsap.registerPlugin(useGSAP);
 
 export default function Light() {
-    const setTime = useGame((s) => s.setTime);
+    const { setTime } = useGameActions();
     const lightRef = useRef();
     const colorDay = new Color('rgb(255,255,255)');
     const colorDusk = new Color('rgb(207, 157, 82)');

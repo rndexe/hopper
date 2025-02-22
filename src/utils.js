@@ -1,4 +1,5 @@
 import { DataTexture, NearestFilter, RedFormat, MathUtils } from 'three';
+import { useEffect, useRef, useCallback } from 'react';
 
 export function createGradientTexture(mode = 'body') {
     const size = 15; // Number of gradient steps
@@ -51,3 +52,37 @@ export function playAudio(audio, volume = 1) {
 export function isTouch() {
     return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
 }
+
+export const useRandomInterval = (callback, minDelay, maxDelay) => {
+    const timeoutId = useRef(null);
+    const savedCallback = useRef(callback);
+
+    useEffect(() => {
+        savedCallback.current = callback;
+    }, [callback]);
+
+    useEffect(() => {
+        let isEnabled = typeof minDelay === 'number' && typeof maxDelay === 'number';
+
+        if (isEnabled) {
+            const handleTick = () => {
+                const nextTickAt = MathUtils.randInt(minDelay, maxDelay);
+
+                timeoutId.current = setTimeout(() => {
+                    savedCallback.current();
+                    handleTick();
+                }, nextTickAt);
+            };
+
+            handleTick();
+        }
+
+        return () => clearTimeout(timeoutId.current);
+    }, [minDelay, maxDelay]);
+
+    const cancel = useCallback(function () {
+        clearTimeout(timeoutId.current);
+    }, []);
+
+    return cancel;
+};
