@@ -27,7 +27,7 @@ export default function App() {
             </Canvas>
             <KeyboardControls />
             <JoystickControls />
-            <Loader dataStyles={{ fontFamily: 'EditUndo' }} />
+            <Loader dataStyles={{ fontFamily: 'Editundo' }} />
         </>
     );
 }

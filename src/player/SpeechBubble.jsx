@@ -58,6 +58,6 @@ function sleepAnimation(ctx, frameCount) {
 
     ctx.fillStyle = '#fff';
     // ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.font = `${40}px EditUndo`;
+    ctx.font = `${40}px Editundo`;
     ctx.fillText(`z`, 20 + 20 * fc, 100 - 20 * fc);
 }
