@@ -5,6 +5,7 @@ import Food from '../physics/Food';
 import Fireflies from './Fireflies';
 import Colliders from '../physics/Colliders';
 import SleepArea from '../physics/SleepArea';
+import Fence from '../physics/Fence';
 
 export default function Ground() {
     return (
@@ -15,6 +16,7 @@ export default function Ground() {
             <SleepArea />
             <Fireflies count={10} />
             <Food />
+            <Fence />
         </>
     );
 }
