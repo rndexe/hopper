@@ -1,4 +1,4 @@
-import { CuboidCollider, RigidBody } from '@react-three/rapier';
+import { CylinderCollider, RigidBody } from '@react-three/rapier';
 import { boundarySize, groundLevel } from '../store';
 import Scenery from '../models/SceneModel';
 import Food from '../physics/Food';
@@ -23,7 +23,7 @@ function BigGroundPlane() {
     const size = 1.8 * boundarySize;
     return (
         <RigidBody type="fixed" userData={{ name: 'ground' }} restitution={0}>
-            <CuboidCollider args={[size, groundLevel, size]} />
+            <CylinderCollider args={[groundLevel, size]} />
             <group rotation-x={-Math.PI / 2} position-y={groundLevel - 0.2}>
                 <mesh scale={[size, size, 1]} receiveShadow>
                     <circleGeometry />

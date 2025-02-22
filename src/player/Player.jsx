@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { Outlines } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import { createGradientTexture, playAudio, normalize } from '../utils';
-import { mutation, useGame } from '../store';
+import { mutation, useGame, useGameActions } from '../store';
 import { PlayerShadow } from './PlayerShadow';
 import Eyes from './Eyes';
 import SpeechBubble from './SpeechBubble';
@@ -12,7 +12,7 @@ export default function Player() {
     const playerRef = useRef();
     const meshRef = useRef();
     const resetKey = useGame((s) => s.resetKey);
-    const reset = useGame((s) => s.reset);
+    const { reset } = useGameActions();
     const animation = useGame((s) => s.animation);
     const gradientMap = useMemo(() => createGradientTexture(), []);
     const jumpSound = useRef(new Audio('./audio/slime_jump.mp3'));
