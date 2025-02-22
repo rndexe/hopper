@@ -43,7 +43,7 @@ export default function SpeechBubble() {
 
     return (
         <sprite position={[1.3, 1.2, 0]} scale={[1, 1, 1]}>
-            <spriteMaterial>
+            <spriteMaterial depthTest={false}>
                 <canvasTexture ref={textureRef} attach="map" image={canvasRef.current} />
             </spriteMaterial>
         </sprite>
