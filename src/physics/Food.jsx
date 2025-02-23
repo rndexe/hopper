@@ -2,7 +2,7 @@ import { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useTexture } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
-import { groundLevel } from '../store';
+import { groundLevel, useGameActions } from '../store';
 import { playAudio, getRandomPosition } from '../utils';
 import Apple from '../models/AppleModel';
 
@@ -29,11 +29,13 @@ function Fruit({ position }) {
     const eatSound = useRef(new Audio('./audio/pop.mp3'));
     const fruitHeight = useMemo(() => groundLevel + 1, []);
     const phase = useMemo(() => Math.random());
+    const { changeHealth } = useGameActions();
 
     const handleIntersection = () => {
         const pos = appleRef.current.translation();
         appleRef.current.setTranslation({ x: pos.x, y: -5, z: pos.z });
         playAudio(eatSound.current);
+        changeHealth(10);
         setTimeout(reset, 5000);
     };
 

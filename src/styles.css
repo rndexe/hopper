@@ -30,13 +30,13 @@ body {
 }
 
 .inner {
-    background-color: transparent;
+    background-color: black;
     /* border: 10px solid #ec4899; */
     display: flex;
+    flex-direction: column;
+    padding: 1.75rem;
     align-items: center;
     justify-content: center;
-    font-family: 'Editundo';
-    color: white;
 }
 
 .container {
@@ -49,7 +49,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Editundo';
+    color: white;
     z-index: 1000;
+    padding-inline: 2rem;
 }
 
 button {
@@ -62,10 +65,25 @@ button {
     outline: inherit;
 }
 
+h1 {
+    text-wrap: balance;
+    text-align: center;
+}
+p {
+    margin: 0px;
+}
+
+.intro-p {
+    margin-block-end: 2rem;
+    text-align: center;
+    font-size: 1.25rem;
+}
+
 .start {
-    font-size: 3rem;
-    background-color: black;
-    padding: 0.5rem 2rem;
+    font-size: 2rem;
+    background-color: white;
+    color: black;
+    padding: 0.5rem 1rem;
 }
 
 .pixel-corners {
@@ -83,4 +101,18 @@ button {
         12px 12px,
         0px 12px
     );
+}
+
+.healthbar {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 2rem;
+}
+
+@media (width >= 40rem) {
+    .healthbar {
+        top: 2rem;
+        left: 2rem;
+    }
 }

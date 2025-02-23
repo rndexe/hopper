@@ -8,7 +8,7 @@ import { KeyboardControls, JoystickControls } from './components/Controls';
 import Player from './player/Player';
 import Ground from './components/Ground';
 import Camera from './components/Camera';
-import Loader from './ui/Loader';
+import Overlay from './ui/Overlay';
 
 export default function App() {
     return (
@@ -28,7 +28,7 @@ export default function App() {
             </Canvas>
             <KeyboardControls />
             <JoystickControls />
-            <Loader />
+            <Overlay />
         </>
     );
 }
