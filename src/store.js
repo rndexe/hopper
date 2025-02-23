@@ -9,12 +9,14 @@ export const useGame = create((set, get) => {
         time: 'morning',
         resetKey: 0,
         animation: 'idle',
-        userInput: 'false',
+        userInput: false,
+        gameStart: false,
         actions: {
             setTime: (time) => set({ time: time }),
             reset: () => set((state) => ({ resetKey: state.resetKey + 1 })),
             setAnimation: (mode) => set({ animation: mode }),
             setUserInput: (bool) => set({ userInput: bool }),
+            setGameStart: (bool) => set({ gameStart: bool }),
         },
     };
 });

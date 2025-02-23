@@ -1,13 +1,14 @@
 import { ACESFilmicToneMapping } from 'three';
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Environment, Loader } from '@react-three/drei';
+import { OrbitControls, Environment } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 import { Physics } from '@react-three/rapier';
 import { KeyboardControls, JoystickControls } from './components/Controls';
 import Player from './player/Player';
 import Ground from './components/Ground';
 import Camera from './components/Camera';
+import Loader from './ui/Loader';
 
 export default function App() {
     return (
@@ -21,13 +22,13 @@ export default function App() {
                         <Ground />
                         <Player />
                         <Camera />
-                        <Environment files="./images/dikhololo_night_1k.jpg" environmentIntensity={0.1} />
+                        <Environment files="./images/envmap.jpg" environmentIntensity={0.1} />
                     </Physics>
                 </Suspense>
             </Canvas>
             <KeyboardControls />
             <JoystickControls />
-            <Loader dataStyles={{ fontFamily: 'Editundo' }} />
+            <Loader />
         </>
     );
 }
