@@ -1,27 +1,27 @@
+import { useMemo } from 'react';
 import { useGLTF } from '@react-three/drei';
-import { RigidBody } from '@react-three/rapier';
+import { InstancedRigidBodies } from '@react-three/rapier';
 
 export default function Fence() {
-    const { scene } = useGLTF('./models/fence.glb');
+    const { scene, nodes } = useGLTF('./models/fence.glb');
+
+    const instances = useMemo(
+        () =>
+            scene.children.map((child) => ({
+                key: child.uuid,
+                position: child.position.toArray(),
+                rotation: child.rotation.toArray(),
+                scale: child.scale.toArray(),
+            })),
+        [scene.children],
+    );
     return (
         <group position-y={0.1}>
-            {scene.children.map((child) => {
-                if (child.isMesh)
-                    return (
-                        <RigidBody
-                            colliders="cuboid"
-                            key={child.uuid}
-                            rotation={child.rotation.toArray()}
-                            position={child.position.toArray()}
-                            userData={{ name: 'ground' }}
-                            mass={0.1}>
-                            <mesh geometry={child.geometry} scale={child.scale.toArray()}>
-                                <meshStandardMaterial color={'#854d0e'} />
-                            </mesh>
-                        </RigidBody>
-                    );
-                else return null;
-            })}
+            <InstancedRigidBodies instances={instances} colliders="cuboid" userData={{ name: 'ground' }}>
+                <instancedMesh count={instances.length} args={[nodes.Cube012.geometry, undefined, instances.length]}>
+                    <meshStandardMaterial color={'#854d0e'} />
+                </instancedMesh>
+            </InstancedRigidBodies>
         </group>
     );
 }
