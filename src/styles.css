@@ -13,6 +13,7 @@ body,
 
 body {
     background: #121212;
+    overscroll-behavior: none;
 }
 
 .joystick {
