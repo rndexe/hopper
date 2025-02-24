@@ -12,7 +12,7 @@ export default function Light() {
     const colorDusk = new Color('rgb(207, 157, 82)');
     const colorNight = new Color('rgb(106, 130, 207)');
 
-    const testScale = import.meta.env.DEV ? 0.5 : 1;
+    const testScale = import.meta.env.DEV ? 2 : 2.5;
 
     const dayTime = 15 * testScale;
     const nightTime = 15 * testScale;

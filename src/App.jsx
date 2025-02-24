@@ -1,7 +1,7 @@
 import { ACESFilmicToneMapping } from 'three';
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Environment } from '@react-three/drei';
+import { OrbitControls, Environment, Effects } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 import { Physics } from '@react-three/rapier';
 import { KeyboardControls, JoystickControls } from './components/Controls';
@@ -9,6 +9,7 @@ import Player from './player/Player';
 import Ground from './components/Ground';
 import Camera from './components/Camera';
 import Overlay from './ui/Overlay';
+import { Bloom, EffectComposer } from '@react-three/postprocessing';
 
 export default function App() {
     return (

@@ -1,4 +1,4 @@
-import { RigidBody } from '@react-three/rapier';
+import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import { useFrame } from '@react-three/fiber';
 import { useState, useEffect, useRef } from 'react';
 import { GameState, useGame, useGameActions } from '../store';
@@ -80,18 +80,13 @@ export function MovingBody({ pos }) {
     });
 
     return (
-        <RigidBody
-            ref={bodyRef}
-            type="dynamic"
-            position={pos}
-            colliders="cuboid"
-            sensor
-            onIntersectionEnter={enemyInteraction}>
-            <mesh scale={0.1}>
+        <RigidBody ref={bodyRef} type="dynamic" position={pos} onIntersectionEnter={enemyInteraction}>
+            <CuboidCollider args={[0.2, 0.2, 0.2]} sensor />
+            <mesh scale={0.2}>
                 <icosahedronGeometry args={[1, 1]} />
-                <meshBasicMaterial color="red" />
+                <meshBasicMaterial color={'black'} toneMapped={false} />
             </mesh>
-            {/* <pointLight color={'red'} decay={0} /> */}
+            <pointLight color={'#500724'} decay={1} intensity={10} />
         </RigidBody>
     );
 }

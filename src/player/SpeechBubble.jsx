@@ -60,7 +60,7 @@ function sleepAnimation(ctx, frameCount) {
 
     ctx.fillStyle = '#fff';
     ctx.font = '80px Editundo';
-    ctx.fillText('z', 20 + 20 * fc, 100 - 20 * fc);
+    ctx.fillText('z', 20 + 40 * fc, 200 - 20 * fc);
 }
 
 function fullAnimation(ctx, frameCount) {
