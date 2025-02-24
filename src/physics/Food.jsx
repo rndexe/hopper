@@ -8,7 +8,7 @@ import Apple from '../models/AppleModel';
 
 export default function Food() {
     const fruitPositions = useMemo(() => {
-        return Array.from({ length: 2 }, () => {
+        return Array.from({ length: 5 }, () => {
             const { x, z } = getRandomPosition();
             return [x, groundLevel + 1, z];
         });
@@ -31,18 +31,19 @@ function Fruit({ position }) {
     const phase = useMemo(() => Math.random());
     const { changeHealth } = useGameActions();
 
-    const handleIntersection = () => {
+    function handleIntersection(payload) {
+        if (payload.other.rigidBody.userData.name != 'player') return;
         const pos = appleRef.current.translation();
         appleRef.current.setTranslation({ x: pos.x, y: -5, z: pos.z });
         playAudio(eatSound.current);
         changeHealth(10);
         setTimeout(reset, 5000);
-    };
+    }
 
-    const reset = () => {
+    function reset() {
         const { x, z } = getRandomPosition();
         appleRef.current.setTranslation({ x: x, y: fruitHeight, z: z });
-    };
+    }
 
     useFrame((state, delta) => {
         meshRef.current.position.y = 0.01 * Math.sin(2 * state.clock.elapsedTime + phase);
