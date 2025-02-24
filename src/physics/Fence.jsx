@@ -18,9 +18,13 @@ export default function Fence() {
         [scene.children],
     );
     return (
-        <group position-y={0.1} key={resetKey}>
+        <group position-y={0.05} key={resetKey}>
             <InstancedRigidBodies instances={instances} colliders="cuboid" userData={{ name: 'ground' }}>
-                <instancedMesh count={instances.length} args={[nodes.Cube012.geometry, undefined, instances.length]}>
+                <instancedMesh
+                    count={instances.length}
+                    args={[nodes.Cube012.geometry, undefined, instances.length]}
+                    castShadow
+                    receiveShadow>
                     <meshStandardMaterial color={'#854d0e'} />
                 </instancedMesh>
             </InstancedRigidBodies>
