@@ -34,7 +34,7 @@ export default function Player() {
     useFrame((state, delta) => {
         const { forward, back, left, right } = mutation.controls;
         const isKeyPressed = forward || back || left || right;
-        if (isKeyPressed && !mutation.isJumping && animation == 'idle') {
+        if (isKeyPressed && !mutation.isJumping && animation != 'sleeping' && animation != 'dead') {
             mutation.isJumping = true;
             const nextV = { x: 0, y: mutation.jumpVelocity, z: 0 };
             const maxV = 2.5;

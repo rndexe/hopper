@@ -1,4 +1,4 @@
-import { useGameActions, GameState } from '../store';
+import { useGameActions, GameState, useGame } from '../store';
 import { isTouch } from '../utils';
 
 export function StartScreen() {
@@ -26,9 +26,15 @@ export function StartScreen() {
 }
 
 export function Reset() {
+    const { deathReason } = useGame.getState();
+    const { reset } = useGameActions();
+
     return (
         <ModalContainer>
-            <button>Play again</button>
+            <h2>{`You died ${deathReason}`}</h2>
+            <button className="start" onClick={reset}>
+                Play again
+            </button>
         </ModalContainer>
     );
 }

@@ -17,8 +17,8 @@ export default function SleepArea() {
     }, [isInCave, time]);
 
     useEffect(() => {
-        if (userInputDetected) {
-            // console.log('hello');
+        const { animation } = useGame.getState();
+        if (userInputDetected && animation == 'sleeping') {
             setAnimation('idle');
         }
     }, [userInputDetected]);

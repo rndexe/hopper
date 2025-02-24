@@ -3,27 +3,33 @@ import { StartScreen, Reset } from './Modals';
 import Loader from './Loader';
 import Hud from './Hud';
 
-function Overlay() {
+export default function Overlay() {
     const gameState = useGame((s) => s.gameState);
 
     switch (gameState) {
         case GameState.loading:
-            return <Loader />;
+            return (
+                <OverlayContainer>
+                    <Loader />
+                </OverlayContainer>
+            );
         case GameState.loaded:
-            return <StartScreen />;
+            return (
+                <OverlayContainer>
+                    <StartScreen />
+                </OverlayContainer>
+            );
         case GameState.started:
             return <Hud />;
         case GameState.over:
-            return <Reset />;
+            return (
+                <OverlayContainer>
+                    <Reset />
+                </OverlayContainer>
+            );
     }
 }
 
-function OverlayContainer() {
-    return (
-        <div className="container">
-            <Overlay />
-        </div>
-    );
+function OverlayContainer({ children }) {
+    return <div className="container">{children}</div>;
 }
-
-export default OverlayContainer;

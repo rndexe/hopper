@@ -1,4 +1,4 @@
-import { NearestFilter } from 'three';
+import { NearestMipMapNearestFilter } from 'three';
 import { useRef, useEffect } from 'react';
 import { mutation, useGame, canvasSize } from '../store';
 
@@ -14,7 +14,7 @@ export default function SpeechBubble() {
     useEffect(() => {
         canvasRef.current.width = canvasSize;
         canvasRef.current.height = canvasSize;
-        textureRef.current.minFilter = NearestFilter;
+        textureRef.current.minFilter = NearestMipMapNearestFilter;
     }, []);
 
     useEffect(() => {
@@ -32,14 +32,14 @@ export default function SpeechBubble() {
             return;
         } else if (animation == 'sleeping') {
             sleepAnimation(context.current, frameCount.current);
+        } else if (animation == 'full') {
+            fullAnimation(context.current, frameCount.current);
         }
 
         if (textureRef.current) textureRef.current.needsUpdate = true;
         frameCount.current += 1;
         timeoutID.current = setTimeout(updateCanvas, 1000);
     }
-
-    // useAnimationDebug(animation);
 
     return (
         <sprite position={[1.3, 1.2, 0]} scale={[1, 1, 1]}>
@@ -57,7 +57,15 @@ function sleepAnimation(ctx, frameCount) {
     }
 
     ctx.fillStyle = '#fff';
-    // ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.font = `${40}px Editundo`;
-    ctx.fillText(`z`, 20 + 20 * fc, 100 - 20 * fc);
+    ctx.font = '80px Editundo';
+    ctx.fillText('z', 20 + 20 * fc, 100 - 20 * fc);
+}
+
+function fullAnimation(ctx, frameCount) {
+    ctx.beginPath();
+    ctx.fillStyle = '#fff';
+    ctx.font = '80px Editundo';
+    ctx.textAlign = 'center';
+    ctx.fillText('TOO', canvasSize / 2, canvasSize / 2);
+    ctx.fillText('FULL!', canvasSize / 2, canvasSize / 2 + 60);
 }

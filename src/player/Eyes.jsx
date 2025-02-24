@@ -42,6 +42,12 @@ export default function Eyes() {
 }
 
 function Eye({ position }) {
+    const animation = useGame((s) => s.animation);
+
+    return animation == 'dead' ? <DeadEye position={position} /> : <RoundEye position={position} />;
+}
+
+function RoundEye({ position }) {
     const gradientMap = useMemo(() => createGradientTexture('eyes'), []);
 
     return (
@@ -49,5 +55,19 @@ function Eye({ position }) {
             <icosahedronGeometry args={[1, 1]} />
             <meshToonMaterial color={'white'} gradientMap={gradientMap} />
         </mesh>
+    );
+}
+function DeadEye({ position }) {
+    return (
+        <>
+            <mesh position-x={position} scale={[0.1, 0.4, 0.1]} rotation-z={Math.PI / 4}>
+                <boxGeometry />
+                <meshBasicMaterial color={'black'} />
+            </mesh>
+            <mesh position-x={position} scale={[0.1, 0.4, 0.1]} rotation-z={-Math.PI / 4}>
+                <boxGeometry />
+                <meshBasicMaterial color={'black'} />
+            </mesh>
+        </>
     );
 }
