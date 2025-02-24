@@ -2,6 +2,7 @@ import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import { useFrame } from '@react-three/fiber';
 import { useState, useEffect, useRef } from 'react';
 import { GameState, useGame, useGameActions } from '../store';
+import FakeGlowMaterial from '../material/FakeGlowMaterial';
 
 const radius = 15; // Radius of allowed movement
 const speed = 2; // Speed of movement
@@ -82,11 +83,14 @@ export function MovingBody({ pos }) {
     return (
         <RigidBody ref={bodyRef} type="dynamic" position={pos} onIntersectionEnter={enemyInteraction}>
             <CuboidCollider args={[0.2, 0.2, 0.2]} sensor />
+            <mesh scale={1}>
+                <icosahedronGeometry args={[1, 1]} />
+                <FakeGlowMaterial glowColor={'#500724'} depthTest />
+            </mesh>
             <mesh scale={0.2}>
                 <icosahedronGeometry args={[1, 1]} />
-                <meshBasicMaterial color={'black'} toneMapped={false} />
+                <meshBasicMaterial color={'black'} />
             </mesh>
-            <pointLight color={'#500724'} decay={1} intensity={10} />
         </RigidBody>
     );
 }
