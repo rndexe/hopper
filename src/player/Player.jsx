@@ -65,7 +65,12 @@ export default function Player() {
 
     return (
         <group key={resetKey}>
-            <RigidBody ref={playerRef} onCollisionEnter={jump} lockRotations position-y={mutation.position[1]}>
+            <RigidBody
+                ref={playerRef}
+                onCollisionEnter={jump}
+                lockRotations
+                position-y={mutation.position[1]}
+                userData={{ name: 'player' }}>
                 <CuboidCollider args={[0.8, 1, 0.8]} restitution={0} friction={100} />
                 <group ref={meshRef}>
                     <mesh>

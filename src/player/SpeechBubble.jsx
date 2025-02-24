@@ -34,6 +34,8 @@ export default function SpeechBubble() {
             sleepAnimation(context.current, frameCount.current);
         } else if (animation == 'full') {
             fullAnimation(context.current, frameCount.current);
+        } else if (animation == 'hurt') {
+            hurtAnimation(context.current, frameCount.current);
         }
 
         if (textureRef.current) textureRef.current.needsUpdate = true;
@@ -68,4 +70,12 @@ function fullAnimation(ctx, frameCount) {
     ctx.textAlign = 'center';
     ctx.fillText('TOO', canvasSize / 2, canvasSize / 2);
     ctx.fillText('FULL!', canvasSize / 2, canvasSize / 2 + 60);
+}
+
+function hurtAnimation(ctx, frameCount) {
+    ctx.beginPath();
+    ctx.fillStyle = '#fff';
+    ctx.font = '80px Editundo';
+    ctx.textAlign = 'center';
+    ctx.fillText('OUCH!', canvasSize / 2, canvasSize / 2 + 60);
 }
