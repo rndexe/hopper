@@ -1,18 +1,19 @@
 import { Color } from 'three';
 import { useRef } from 'react';
-import { useGameActions } from '../store';
+import { GameState, useGame, useGameActions } from '../store';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 gsap.registerPlugin(useGSAP);
 
 export default function Light() {
     const { setTime } = useGameActions();
+    const gameState = useGame((s) => s.gameState);
     const lightRef = useRef();
     const colorDay = new Color('rgb(255,255,255)');
     const colorDusk = new Color('rgb(207, 157, 82)');
     const colorNight = new Color('rgb(106, 130, 207)');
 
-    const testScale = import.meta.env.DEV ? 2 : 2.5;
+    const testScale = import.meta.env.DEV ? 0.4 : 2.5;
 
     const dayTime = 15 * testScale;
     const nightTime = 15 * testScale;
@@ -20,7 +21,7 @@ export default function Light() {
     const changeDuration = 5 * testScale;
 
     useGSAP(() => {
-        if (lightRef.current) {
+        if (lightRef.current && gameState == GameState.started) {
             gsap.timeline({
                 repeat: -1,
                 paused: false,
@@ -54,7 +55,7 @@ export default function Light() {
                     },
                 });
         }
-    }, []);
+    }, [gameState]);
 
     return (
         <directionalLight
