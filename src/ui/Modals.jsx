@@ -31,7 +31,7 @@ export function Reset() {
 
     return (
         <ModalContainer>
-            <h2>{`You died ${deathReason}`}</h2>
+            <h1>{`Hoppy died ${deathReason}`}</h1>
             <button className="start" onClick={reset}>
                 Play again
             </button>
