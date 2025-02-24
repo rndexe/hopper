@@ -7,17 +7,7 @@ export default function Loader() {
     const progress = useProgress((s) => s.progress);
     const { setGameState } = useGameActions();
 
-    // useEffect(() => {
-    //     // let timeoutID;
-    //     // if (!active)
-    //     //     timeoutID = setTimeout(() => {
-    //     //         setGameState(GameState.loaded);
-    //     //     }, 300);
-    //     // return () => clearTimeout(timeoutID);
-    // }, [active]);
-
     useEffect(() => {
-        // console.log(progress);
         let timeoutID;
         if (progress >= 100) {
             timeoutID = setTimeout(() => {
