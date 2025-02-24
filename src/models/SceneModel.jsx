@@ -37,8 +37,6 @@ export function Model(props) {
     );
 }
 
-useGLTF.preload('/tmgtchi-transformed.glb');
-
 export default function Scenery() {
     return (
         <Instances castShadow receiveShadow>
