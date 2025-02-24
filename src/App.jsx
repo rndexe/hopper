@@ -9,7 +9,6 @@ import Player from './player/Player';
 import Ground from './components/Ground';
 import Camera from './components/Camera';
 import Overlay from './ui/Overlay';
-import { Bloom, EffectComposer } from '@react-three/postprocessing';
 
 export default function App() {
     return (
