@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { Outlines } from '@react-three/drei';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import { createGradientTexture, playAudio, normalize } from '../utils';
-import { mutation, useGame, useGameActions } from '../store';
+import { GameState, mutation, useGame, useGameActions } from '../store';
 import { PlayerShadow } from './PlayerShadow';
 import Eyes from './Eyes';
 import SpeechBubble from './SpeechBubble';
@@ -12,7 +12,7 @@ export default function Player() {
     const playerRef = useRef();
     const meshRef = useRef();
     const resetKey = useGame((s) => s.resetKey);
-    const { reset } = useGameActions();
+    const { setGameState } = useGameActions();
     const animation = useGame((s) => s.animation);
     const gradientMap = useMemo(() => createGradientTexture(), []);
     const jumpSound = useRef(new Audio('./audio/slime_jump.mp3'));
@@ -26,7 +26,7 @@ export default function Player() {
     }
 
     useEffect(() => {
-        if (animation == 'sleeping') {
+        if (animation == 'sleeping' || animation == 'dead') {
             meshRef.current.rotation.set(0, 0, 0);
         }
     }, [animation]);
@@ -58,7 +58,9 @@ export default function Player() {
 
         // Update position store
         Object.assign(mutation.position, playerRef.current.translation());
-        if (mutation.position.y < -20) reset();
+        if (mutation.position.y < -10) {
+            setGameState(GameState.over);
+        }
     });
 
     return (

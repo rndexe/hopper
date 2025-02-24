@@ -38,17 +38,21 @@ export const useGame = create((set, get) => {
                 set({ gameState: state });
             },
             changeHealth: (amount) => {
-                const { health, animation } = get();
+                const { health } = get();
                 const newHealth = health + amount;
-                let newAnimation = animation;
-                if (health >= 150) {
-                    newAnimation = 'dead';
+
+                if (newHealth >= 150) {
+                    set({ animation: 'dead' });
                     setTimeout(() => set({ deathReason: 'of overeating', gameState: GameState.over }), 1000);
-                } else if (health >= 100) {
-                    newAnimation = 'full';
+                    // break;
+                } else if (newHealth >= 100) {
+                    set({ animation: 'full' });
                     setTimeout(() => set({ animation: 'idle' }), 2000);
+                } else if (newHealth <= 0) {
+                    set({ animation: 'dead' });
+                    setTimeout(() => set({ deathReason: 'of hunger', gameState: GameState.over }), 1000);
                 }
-                set({ health: newHealth, animation: newAnimation });
+                set({ health: newHealth });
             },
         },
     };
