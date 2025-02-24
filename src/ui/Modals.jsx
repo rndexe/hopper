@@ -11,6 +11,7 @@ export function StartScreen() {
             </h1>
             <div className="intro-p">
                 <p>Use {isTouch() ? 'Joystick' : 'WASD/Arrow keys'} to move.</p>
+                <p>Enjoy fruit, be healthy.</p>
                 <p>Stay safe at night!</p>
             </div>
 
