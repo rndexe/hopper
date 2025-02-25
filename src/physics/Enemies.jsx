@@ -2,6 +2,7 @@ import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import { useFrame } from '@react-three/fiber';
 import { useState, useEffect, useRef } from 'react';
 import { GameState, useGame, useGameActions } from '../store';
+import { useTexture } from '@react-three/drei';
 import FakeGlowMaterial from '../material/FakeGlowMaterial';
 
 const radius = 15; // Radius of allowed movement
@@ -10,6 +11,7 @@ const minHeight = 0.5;
 const maxHeight = 3;
 
 export function MovingBody({ pos }) {
+    const texture = useTexture('./images/ghost.jpg');
     const bodyRef = useRef();
     const [velocity, setVelocity] = useState([0, 0, 0]);
     const { setAnimation, setGameState, changeHealth } = useGameActions();
@@ -87,9 +89,9 @@ export function MovingBody({ pos }) {
                 <icosahedronGeometry args={[1, 1]} />
                 <FakeGlowMaterial glowColor={'purple'} depthTest falloff={0} glowSharpness={0.1} />
             </mesh>
-            <mesh scale={0.2}>
+            <mesh scale={0.2} rotation-y={Math.PI / 2}>
                 <icosahedronGeometry args={[1, 1]} />
-                <meshBasicMaterial color={'red'} />
+                <meshBasicMaterial map={texture} />
             </mesh>
         </RigidBody>
     );

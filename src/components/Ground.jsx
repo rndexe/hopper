@@ -7,7 +7,6 @@ import Colliders from '../physics/Colliders';
 import SleepArea from '../physics/SleepArea';
 import Fence from '../physics/Fence';
 import Enemies from '../physics/Enemies';
-import { SoftShadows } from '@react-three/drei';
 
 export default function Ground() {
     return (
@@ -20,7 +19,6 @@ export default function Ground() {
             <Enemies />
             <Food />
             <Fence />
-            {/* <SoftShadows /> */}
         </>
     );
 }
