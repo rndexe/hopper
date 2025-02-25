@@ -34,7 +34,14 @@ export default function Player() {
     useFrame((state, delta) => {
         const { forward, back, left, right } = mutation.controls;
         const isKeyPressed = forward || back || left || right;
-        if (isKeyPressed && !mutation.isJumping && animation != 'sleeping' && animation != 'dead') {
+
+        if (
+            isKeyPressed &&
+            !mutation.isJumping &&
+            animation != 'sleeping' &&
+            animation != 'dead' &&
+            useGame.getState().gameState == GameState.started
+        ) {
             mutation.isJumping = true;
             const nextV = { x: 0, y: mutation.jumpVelocity, z: 0 };
             const maxV = 2.5;
@@ -58,7 +65,7 @@ export default function Player() {
 
         // Update position store
         Object.assign(mutation.position, playerRef.current.translation());
-        if (mutation.position.y < -10) {
+        if (mutation.position.y < -10 && useGame.getState().gameState == GameState.started) {
             setGameState(GameState.over);
         }
     });

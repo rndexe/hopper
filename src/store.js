@@ -12,7 +12,7 @@ export const GameState = {
 };
 
 export const useGame = create((set, get) => {
-    const initialHealth = 50;
+    const initialHealth = 30;
     // let timeoutID = 0;
     return {
         time: 'morning',
@@ -25,13 +25,14 @@ export const useGame = create((set, get) => {
         actions: {
             setTime: (time) => set({ time: time }),
             reset: () => {
+                mutation.position = { x: 0, y: 2, z: 0 };
                 set((state) => ({
                     resetKey: state.resetKey + 1,
                     health: initialHealth,
                     gameState: GameState.started,
                     animation: 'idle',
                     deathReason: 'mysteriously',
-                    time: 'morning',
+                    // time: 'morning',
                 }));
             },
             setAnimation: (mode) => set({ animation: mode }),
@@ -43,7 +44,7 @@ export const useGame = create((set, get) => {
                 const { health } = get();
                 const newHealth = health + amount;
 
-                if (newHealth >= 150) {
+                if (newHealth >= 120) {
                     set({ animation: 'dead' });
                     setTimeout(() => set({ deathReason: 'of overeating', gameState: GameState.over }), 1000);
                     // break;

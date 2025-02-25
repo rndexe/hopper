@@ -85,11 +85,11 @@ export function MovingBody({ pos }) {
             <CuboidCollider args={[0.2, 0.2, 0.2]} sensor />
             <mesh scale={1}>
                 <icosahedronGeometry args={[1, 1]} />
-                <FakeGlowMaterial glowColor={'#500724'} depthTest />
+                <FakeGlowMaterial glowColor={'purple'} depthTest falloff={0} glowSharpness={0.1} />
             </mesh>
             <mesh scale={0.2}>
                 <icosahedronGeometry args={[1, 1]} />
-                <meshBasicMaterial color={'black'} />
+                <meshBasicMaterial color={'red'} />
             </mesh>
         </RigidBody>
     );
@@ -100,6 +100,8 @@ export default function Enemies() {
         <>
             <MovingBody pos={[10, 0, 10]} />
             <MovingBody pos={[-10, 0, -10]} />
+            <MovingBody pos={[10, 0, -10]} />
+            <MovingBody pos={[-10, 0, 10]} />
         </>
     );
 }
