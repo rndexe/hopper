@@ -57,6 +57,8 @@ export function KeyboardControls() {
 }
 
 export function JoystickControls() {
+    const { setUserInput } = useGameActions();
+
     function handleJoystick(code) {
         setKeyStore(code, true);
         if (code != 'Center') setUserInput(true);
@@ -78,7 +80,6 @@ export function JoystickControls() {
 
 function setKeyStore(code, bool) {
     const keys = mutation.controls;
-
     const direction = keyMap[code];
 
     if (Array.isArray(direction)) {
