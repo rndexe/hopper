@@ -30,6 +30,8 @@ export const useGame = create((set, get) => {
                     health: initialHealth,
                     gameState: GameState.started,
                     animation: 'idle',
+                    deathReason: 'mysteriously',
+                    time: 'morning',
                 }));
             },
             setAnimation: (mode) => set({ animation: mode }),
@@ -45,7 +47,7 @@ export const useGame = create((set, get) => {
                     set({ animation: 'dead' });
                     setTimeout(() => set({ deathReason: 'of overeating', gameState: GameState.over }), 1000);
                     // break;
-                } else if (newHealth >= 100) {
+                } else if (amount > 0 && newHealth >= 100) {
                     set({ animation: 'full' });
                     setTimeout(() => set({ animation: 'idle' }), 2000);
                 } else if (newHealth <= 0) {

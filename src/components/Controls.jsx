@@ -59,6 +59,8 @@ export function KeyboardControls() {
 export function JoystickControls() {
     function handleJoystick(code) {
         setKeyStore(code, true);
+        if (code != 'Center') setUserInput(true);
+        else setUserInput(false);
     }
     return (
         isTouch() && (
