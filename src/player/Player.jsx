@@ -44,7 +44,7 @@ export default function Player() {
         ) {
             mutation.isJumping = true;
             const nextV = { x: 0, y: mutation.jumpVelocity, z: 0 };
-            const maxV = 2.5;
+            const maxV = 3.5;
             if (forward) nextV.z -= maxV;
             if (back) nextV.z += maxV;
             if (left) nextV.x -= maxV;

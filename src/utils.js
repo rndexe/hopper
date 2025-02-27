@@ -38,7 +38,7 @@ export function normalize(v, length) {
 
 export function getRandomPosition() {
     const angle = Math.random() * Math.PI * 2;
-    const radius = MathUtils.lerp(1, 20, Math.random());
+    const radius = MathUtils.lerp(1, 18, Math.random());
     return { x: Math.cos(angle) * radius, z: Math.sin(angle) * radius };
 }
 
