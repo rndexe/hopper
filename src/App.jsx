@@ -18,7 +18,7 @@ export default function App() {
                 {import.meta.env.DEV && <OrbitControls />}
 
                 <Suspense>
-                    <Physics gravity={[0, -10, 0]} debug={import.meta.env.DEV} colliders={false}>
+                    <Physics gravity={[0, -10, 0]} debug={import.meta.env.DEV} colliders={false} timeStep={'vary'}>
                         <Ground />
                         <Player />
                         <Camera />
